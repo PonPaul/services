@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>สำหรับเธอ</title>
+<meta name="description" content="มีบางอย่างอยากให้ดู">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="มีบางอย่างอยากให้ดู">
+<meta property="og:description" content="เปิดดูสิ">
+<meta name="theme-color" content="#fff6f3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Sarabun PSK";src:local("TH Sarabun PSK"),local("THSarabunPSK"),local("TH SarabunPSK"),local("TH Sarabun New"),local("THSarabunNew");size-adjust:128%;unicode-range:U+0E00-0E7F}
+:root{--bg:#fff6f3;--paper:#ffffff;--ink:#3a2a2e;--muted:#8a7378;--rose:#d6456b;--rose-soft:#f9dfe5;--line:#f0dfe2;
+  --font:"Inter","Sarabun PSK","Sarabun",system-ui,sans-serif;--ease:cubic-bezier(.22,.8,.26,1);color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:19px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:8px}
+.wrap{width:min(720px,100% - 40px);margin-inline:auto}
+section{padding:clamp(72px,12vw,120px) 0}
+h1,h2{margin:0;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:clamp(30px,6vw,44px);line-height:1.2;text-align:center}
+.sub{color:var(--muted);text-align:center;margin:10px 0 0}
+.heart{display:inline-block;width:1em;height:1em;color:var(--rose)}
+
+/* intro */
+#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:var(--bg);transition:opacity .8s var(--ease),visibility .8s}
+#intro.gone{opacity:0;visibility:hidden}
+.envelope{all:unset;cursor:pointer;display:grid;justify-items:center;gap:22px;text-align:center;padding:24px}
+.env{position:relative;width:min(260px,70vw);aspect-ratio:3/2;background:var(--paper);border-radius:14px;box-shadow:0 20px 50px -20px rgba(214,69,107,.45),0 0 0 1px var(--line);overflow:hidden}
+.env::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49.5%,var(--line) 50%,transparent 50.5%),linear-gradient(to bottom left,transparent 49.5%,var(--line) 50%,transparent 50.5%)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:55%;background:var(--rose-soft);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s var(--ease)}
+.env .seal{position:absolute;left:50%;top:44%;width:44px;height:44px;margin-left:-22px;border-radius:50%;background:var(--rose);display:grid;place-items:center;color:#fff;box-shadow:0 6px 14px rgba(214,69,107,.4);animation:pulse 1.8s ease-in-out infinite}
+.envelope:hover .flap,.envelope:focus-visible .flap{transform:rotateX(25deg)}
+.env-label{font-size:22px;font-weight:600}
+.env-hint{color:var(--muted);font-size:16px;margin-top:-14px}
+@keyframes pulse{50%{transform:scale(1.08)}}
+
+/* hero */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;padding:80px 0}
+.hero .names{font-size:clamp(44px,11vw,88px);line-height:1.05;font-weight:700}
+.hero .names span{color:var(--rose)}
+.hero .since{margin-top:16px;color:var(--muted);font-size:18px}
+.counter{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,2.4vw,18px);margin:28px auto 0;max-width:520px}
+.counter div{background:var(--paper);border-radius:16px;padding:12px 4px;box-shadow:0 0 0 1px var(--line)}
+.counter b{display:block;font-size:clamp(22px,6vw,40px);font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1;font-family:"Inter",var(--font)}
+.counter span{font-size:14px;color:var(--muted)}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:14px;display:grid;justify-items:center;gap:6px}
+.scroll-hint i{width:1px;height:34px;background:linear-gradient(var(--muted),transparent);animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.floaty{position:absolute;color:var(--rose);opacity:.16;animation:float 9s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-22px) rotate(8deg)}}
+
+/* letter */
+.letter{background:var(--paper);border-radius:24px;padding:clamp(28px,6vw,48px);box-shadow:0 30px 60px -36px rgba(58,42,46,.35),0 0 0 1px var(--line);margin-top:36px;position:relative}
+.letter p{margin:0;white-space:pre-line;font-size:20px;line-height:1.85;min-height:6em}
+.letter .sign{margin-top:22px;text-align:right;color:var(--rose);font-weight:600}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--rose);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* memories */
+.memories{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px max(20px,calc((100vw - 720px)/2)) 12px;scrollbar-width:none}
+.memories::-webkit-scrollbar{display:none}
+.mem{flex:0 0 min(78vw,360px);scroll-snap-align:center;margin:0;background:var(--paper);border-radius:22px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 24px 40px -30px rgba(58,42,46,.4)}
+.mem img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.mem figcaption{padding:14px 18px 18px}
+.mem small{color:var(--rose);font-weight:600;font-size:14px}
+.mem p{margin:2px 0 0;font-size:18px}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);transition:background .3s,width .3s}
+.dots button[aria-current="true"]{background:var(--rose);width:22px;border-radius:4px}
+
+/* reasons */
+.reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:36px}
+@media(min-width:640px){.reasons{grid-template-columns:repeat(3,1fr)}}
+.card{perspective:900px;border:0;padding:0;background:none;aspect-ratio:1/1;text-align:center}
+.card .in{position:relative;width:100%;height:100%;transition:transform .7s var(--ease);transform-style:preserve-3d}
+.card[aria-pressed="true"] .in{transform:rotateY(180deg)}
+.card .f,.card .b{position:absolute;inset:0;border-radius:20px;display:grid;place-items:center;padding:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.card .f{background:var(--paper);box-shadow:0 0 0 1px var(--line);color:var(--rose);font-weight:700;font-size:34px;font-family:"Inter",var(--font)}
+.card .f small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:-6px}
+.card .b{background:var(--rose);color:#fff;transform:rotateY(180deg);font-size:17px;line-height:1.5}
+
+/* question */
+.ask{text-align:center}
+.ask .q{font-size:clamp(30px,6.5vw,46px);line-height:1.25}
+.choices{position:relative;height:150px;margin-top:36px}
+.yes,.no{position:absolute;top:30px;border:0;border-radius:999px;padding:14px 34px;font-size:20px;font-weight:600;transition:transform .2s var(--ease),left .35s var(--ease),top .35s var(--ease)}
+.yes{left:calc(50% - 150px);background:var(--rose);color:#fff;box-shadow:0 12px 26px -10px rgba(214,69,107,.7)}
+.yes:active{transform:scale(.96)}
+.no{left:calc(50% + 30px);background:var(--paper);color:var(--muted);box-shadow:0 0 0 1px var(--line)}
+.answer{display:none;margin-top:8px}
+.answer.show{display:block;animation:rise .8s var(--ease)}
+.answer h3{font-size:clamp(28px,6vw,40px);margin:0;color:var(--rose)}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.burst{position:fixed;pointer-events:none;z-index:30;color:var(--rose);will-change:transform,opacity}
+
+/* music + footer */
+.music{position:fixed;right:16px;bottom:16px;z-index:10;width:48px;height:48px;border-radius:50%;border:0;background:var(--paper);color:var(--rose);box-shadow:0 8px 20px -6px rgba(58,42,46,.3),0 0 0 1px var(--line);display:none;place-items:center}
+.music.on{display:grid}
+footer{padding:40px 20px 60px;text-align:center;color:var(--muted);font-size:12px;line-height:1.5}
+footer a{color:inherit}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<script>
+/* ===================== แก้ข้อมูลต่อออเดอร์ตรงนี้ / EDIT PER ORDER ===================== */
+const LOVE = {
+  from: "เจ",                         // ผู้ให้
+  to: "มิว",                          // ผู้รับ
+  since: "2023-02-14T19:30:00",       // วันเริ่มคบ (ปี-เดือน-วันTเวลา)
+  envelopeText: "มีบางอย่างอยากให้มิวดู",
+  letter: "ถึงมิว\n\nขอบคุณที่อยู่ข้างกันในทุกวัน ทั้งวันที่ดีและวันที่เหนื่อย\nเราอาจไม่ใช่คนพูดเก่ง เลยทำหน้านี้ขึ้นมาแทนคำพูด\nอยากบอกว่ารักนะ และจะรักไปเรื่อย ๆ",
+  memories: [
+    { img: "img/p1.jpg", date: "14 ก.พ. 2023", text: "วันแรกที่เราไปดูพระอาทิตย์ตกด้วยกัน" },
+    { img: "img/p2.jpg", date: "3 มิ.ย. 2023", text: "คาเฟ่ร้านโปรด สั่งเมนูเดิมทุกครั้ง" },
+    { img: "img/p3.jpg", date: "14 ก.พ. 2024", text: "ช่อดอกไม้ช่อแรกที่ให้" },
+    { img: "img/p4.jpg", date: "12 เม.ย. 2025", text: "ทริปทะเลที่เดินกันจนเท้าเปื่อย" }
+  ],
+  reasons: ["ยิ้มแล้วโลกสดใส", "ใจดีกับทุกคน", "ฟังเราเสมอ", "ทำกับข้าวอร่อย", "หัวเราะเสียงดังที่สุด", "อยู่ด้วยแล้วสบายใจ"],
+  question: "อยู่ด้วยกันไปนาน ๆ นะ?",
+  yes: "ตกลง",
+  no: "ไม่",
+  answerTitle: "รักที่สุดเลย",
+  answerText: "สุขสันต์วันครบรอบนะ",
+  music: ""                            // ลิงก์ไฟล์เพลง .mp3 ที่ลูกค้ามีสิทธิ์ใช้ (เว้นว่าง = ไม่มีเพลง)
+};
+/* ==================================================================================== */
+</script>
+
+<div id="intro" role="dialog" aria-label="เปิดซองจดหมาย">
+  <button class="envelope" id="openBtn" aria-label="แตะเพื่อเปิด">
+    <div class="env" aria-hidden="true"><div class="flap"></div><div class="seal"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6C12 6.1 13.6 5 15.6 5 19 5 21 8.4 19.6 11.7 17.5 16.4 12 21 12 21z"/></svg></div></div>
+    <div class="env-label" id="envText"></div>
+    <div class="env-hint">แตะเพื่อเปิด</div>
+  </button>
+</div>
+
+<main>
+  <header class="hero" id="top">
+    <svg class="floaty" style="left:8%;top:18%;width:46px" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6C12 6.1 13.6 5 15.6 5 19 5 21 8.4 19.6 11.7 17.5 16.4 12 21 12 21z"/></svg>
+    <svg class="floaty" style="right:10%;top:30%;width:30px;animation-delay:-3s" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6C12 6.1 13.6 5 15.6 5 19 5 21 8.4 19.6 11.7 17.5 16.4 12 21 12 21z"/></svg>
+    <svg class="floaty" style="left:16%;bottom:20%;width:24px;animation-delay:-6s" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6C12 6.1 13.6 5 15.6 5 19 5 21 8.4 19.6 11.7 17.5 16.4 12 21 12 21z"/></svg>
+    <div class="wrap">
+      <h1 class="names reveal"><span id="nFrom"></span> &amp; <span id="nTo"></span></h1>
+      <p class="since reveal">เราอยู่ด้วยกันมาแล้ว</p>
+      <div class="counter reveal" aria-live="off">
+        <div><b id="cD">0</b><span>วัน</span></div><div><b id="cH">0</b><span>ชั่วโมง</span></div><div><b id="cM">0</b><span>นาที</span></div><div><b id="cS">0</b><span>วินาที</span></div>
+      </div>
+      <p class="sub reveal" id="sinceText"></p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">เลื่อนลง<i></i></div>
+  </header>
+
+  <section id="letterSec">
+    <div class="wrap">
+      <h2 class="reveal">จดหมายถึง<span id="toName2"></span></h2>
+      <div class="letter reveal"><p id="letter" aria-live="polite"></p><div class="sign" id="sign"></div></div>
+    </div>
+  </section>
+
+  <section style="padding-left:0;padding-right:0">
+    <div class="wrap"><h2 class="reveal">ความทรงจำของเรา</h2><p class="sub reveal">เลื่อนดูทีละรูป</p></div>
+    <div class="memories reveal" id="mems" tabindex="0" aria-label="รูปความทรงจำ"></div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="reveal">เหตุผลที่รัก</h2><p class="sub reveal">แตะการ์ดเพื่อเปิดทีละใบ</p>
+      <div class="reasons" id="reasons"></div>
+    </div>
+  </section>
+
+  <section class="ask">
+    <div class="wrap">
+      <h2 class="q reveal" id="question"></h2>
+      <div class="choices" id="choices">
+        <button class="yes" id="yesBtn"></button>
+        <button class="no" id="noBtn"></button>
+      </div>
+      <div class="answer" id="answer" role="status"><h3 id="ansTitle"></h3><p class="sub" id="ansText"></p></div>
+    </div>
+  </section>
+</main>
+
+<button class="music" id="musicBtn" aria-label="เปิดเพลง" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
+<footer id="credits">ภาพตัวอย่างจาก Wikimedia Commons (CC0) — เว็บจริงใช้รูปของลูกค้าเอง</footer>
+
+<script>
+(() => {
+  const L = LOVE, $ = id => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heart = '<svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6C12 6.1 13.6 5 15.6 5 19 5 21 8.4 19.6 11.7 17.5 16.4 12 21 12 21z"/></svg>';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  // fill content
+  $('envText').textContent = L.envelopeText;
+  $('nFrom').textContent = L.from; $('nTo').textContent = L.to; $('toName2').textContent = L.to;
+  $('sign').textContent = 'รัก, ' + L.from;
+  $('question').textContent = L.question; $('yesBtn').textContent = L.yes; $('noBtn').textContent = L.no;
+  $('ansTitle').textContent = L.answerTitle; $('ansText').textContent = L.answerText;
+  document.title = 'สำหรับ' + L.to;
+  const start = new Date(L.since);
+  $('sinceText').textContent = 'ตั้งแต่ ' + start.toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  // counter
+  function tick() {
+    let s = Math.max(0, Math.floor((Date.now() - start) / 1000));
+    const d = Math.floor(s / 86400); s -= d * 86400;
+    const h = Math.floor(s / 3600); s -= h * 3600;
+    const m = Math.floor(s / 60); s -= m * 60;
+    $('cD').textContent = d.toLocaleString('th-TH'); $('cH').textContent = h; $('cM').textContent = m; $('cS').textContent = s;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // memories carousel
+  const mems = $('mems'), dots = $('dots');
+  L.memories.forEach((m, i) => {
+    mems.insertAdjacentHTML('beforeend', `<figure class="mem"><img src="${esc(m.img)}" alt="${esc(m.text)}" loading="lazy"><figcaption><small>${esc(m.date)}</small><p>${esc(m.text)}</p></figcaption></figure>`);
+    const b = document.createElement('button'); b.setAttribute('aria-label', 'รูปที่ ' + (i + 1)); b.setAttribute('aria-current', i === 0);
+    b.onclick = () => mems.children[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+    dots.append(b);
+  });
+  mems.addEventListener('scroll', () => {
+    const c = mems.scrollLeft + mems.clientWidth / 2; let best = 0, bd = 1e9;
+    [...mems.children].forEach((el, i) => { const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - c); if (d < bd) { bd = d; best = i; } });
+    [...dots.children].forEach((d, i) => d.setAttribute('aria-current', i === best));
+  }, { passive: true });
+
+  // reasons
+  L.reasons.forEach((r, i) => $('reasons').insertAdjacentHTML('beforeend',
+    `<button class="card reveal" aria-pressed="false" aria-label="เหตุผลข้อที่ ${i + 1}"><div class="in"><div class="f"><div>${i + 1}<small>แตะเพื่อเปิด</small></div></div><div class="b">${esc(r)}</div></div></button>`));
+  document.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => {
+    const on = c.getAttribute('aria-pressed') !== 'true'; c.setAttribute('aria-pressed', on);
+    c.dataset.label ||= c.getAttribute('aria-label');
+    c.setAttribute('aria-label', on ? c.querySelector('.b').textContent : c.dataset.label);
+  }));
+
+  // letter typewriter
+  let typed = false;
+  function typeLetter() {
+    if (typed) return; typed = true;
+    const el = $('letter'), text = L.letter;
+    if (reduce) { el.textContent = text; return; }
+    let i = 0; const caret = '<span class="caret"></span>';
+    const step = () => { i += text[i] === '\n' ? 1 : 1; el.innerHTML = esc(text.slice(0, i)) + caret; if (i < text.length) setTimeout(step, text[i - 1] === '\n' ? 260 : 45); else el.textContent = text; };
+    step();
+  }
+
+  // reveal + triggers
+  const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); if (e.target.closest('#letterSec') && e.target.classList.contains('letter')) typeLetter(); io.unobserve(e.target); }), { threshold: .2 });
+  document.querySelectorAll('.reveal').forEach(el => reduce ? (el.classList.add('in'), el.classList.contains('letter') && typeLetter()) : io.observe(el));
+
+  // intro
+  const intro = $('intro'), main = document.querySelector('main');
+  main.inert = true; document.body.style.overflow = 'hidden'; $('openBtn').focus();
+  $('openBtn').addEventListener('click', () => { intro.classList.add('gone'); main.inert = false; document.body.style.overflow = ''; burst(innerWidth / 2, innerHeight / 2, 18); startMusic(); });
+
+  // music (optional)
+  const mb = $('musicBtn'); let audio = null;
+  if (L.music) { audio = new Audio(L.music); audio.loop = true; mb.classList.add('on'); }
+  function startMusic() { if (!audio) return; audio.play().then(() => mb.setAttribute('aria-pressed', 'true')).catch(() => {}); }
+  mb.addEventListener('click', () => { if (!audio) return; if (audio.paused) { audio.play(); mb.setAttribute('aria-pressed', 'true'); } else { audio.pause(); mb.setAttribute('aria-pressed', 'false'); } });
+
+  // question: the "no" button slides away
+  const no = $('noBtn'), box = $('choices'); let moves = 0;
+  function dodge(e) {
+    if (e) e.preventDefault();
+    moves++;
+    const bw = box.clientWidth - no.offsetWidth, bh = box.clientHeight - no.offsetHeight;
+    no.style.left = Math.max(0, Math.random() * bw) + 'px'; no.style.top = Math.max(0, Math.random() * bh) + 'px';
+    if (moves > 4) no.textContent = 'แน่ใจเหรอ';
+    if (moves > 8) no.style.transform = 'scale(.8)';
+  }
+  no.addEventListener('mouseenter', dodge); no.addEventListener('click', dodge); no.addEventListener('touchstart', dodge, { passive: false });
+  $('yesBtn').addEventListener('click', e => {
+    const r = e.currentTarget.getBoundingClientRect(); burst(r.left + r.width / 2, r.top, 36);
+    box.style.display = 'none'; $('answer').classList.add('show');
+  });
+
+  // heart burst
+  function burst(x, y, n) {
+    if (reduce) return;
+    for (let i = 0; i < n; i++) {
+      const h = document.createElement('div'); h.className = 'burst'; h.innerHTML = heart;
+      const size = 12 + Math.random() * 18; Object.assign(h.style, { left: x + 'px', top: y + 'px', width: size + 'px', height: size + 'px' });
+      document.body.append(h);
+      const a = Math.random() * Math.PI * 2, d = 80 + Math.random() * 160;
+      h.animate([{ transform: 'translate(-50%,-50%) scale(.4)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d - 50}%, ${Math.sin(a) * d - 120}px) scale(1)`, opacity: 0 }],
+        { duration: 1100 + Math.random() * 700, easing: 'cubic-bezier(.2,.7,.3,1)' }).onfinish = () => h.remove();
+    }
+  }
+})();
+</script>
+</body>
+</html>

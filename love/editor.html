@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>สร้างเว็บเซอร์ไพรส์ของคุณ</title>
+<meta name="description" content="เลือกเทมเพลต ใส่รูปและข้อความของคุณเอง แล้วได้เว็บเซอร์ไพรส์สำหรับคนพิเศษ">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Sarabun PSK";src:local("TH Sarabun PSK"),local("THSarabunPSK"),local("TH SarabunPSK"),local("TH Sarabun New"),local("THSarabunNew");size-adjust:128%;unicode-range:U+0E00-0E7F}
+:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--ink2:#6e6e73;--hair:#d2d2d7;--accent:#d6456b;--accent-h:#bf3a5d;--ok:#0a7c55;--err:#c4321a;
+  --font:"Inter","Sarabun PSK","Sarabun",-apple-system,system-ui,sans-serif;--ease:cubic-bezier(.28,.11,.32,1);color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.top{position:sticky;top:0;z-index:20;height:52px;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+.top .in{max-width:1180px;margin:0 auto;height:100%;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top a{text-decoration:none;color:var(--ink);font-size:14px;opacity:.85;display:inline-flex;align-items:center;gap:6px}
+.save{font-size:13px;color:var(--ink2)}.save.ok{color:var(--ok)}.save.err{color:var(--err)}
+.layout{max-width:1180px;margin:0 auto;padding:28px 20px 120px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:40px;align-items:start}
+@media(max-width:920px){.layout{grid-template-columns:1fr}}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.15;margin:0 0 6px;letter-spacing:-.02em}
+.lede{color:var(--ink2);margin:0 0 24px}
+.panel{background:var(--card);border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:0 0 0 1px rgba(0,0,0,.04)}
+.panel h2{font-size:19px;margin:0 0 4px;letter-spacing:-.01em}
+.panel .hint{color:var(--ink2);font-size:14px;margin:0 0 14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+label.f{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--ink2);margin-bottom:12px}
+.inp{width:100%;font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--hair);border-radius:12px;padding:11px 13px;transition:border-color .2s}
+.inp:focus{outline:none;border-color:var(--accent)}
+textarea.inp{resize:vertical;min-height:110px;line-height:1.6}
+.count{font-weight:400;font-size:12px;color:var(--ink2);justify-self:end;margin-top:-4px}
+
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:560px){.themes{grid-template-columns:repeat(3,1fr)}}
+.th{border:0;background:none;padding:0;cursor:pointer;text-align:center;color:var(--ink)}
+.th .sw{display:block;aspect-ratio:3/4;border-radius:14px;position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.08);transition:box-shadow .2s,transform .2s var(--ease)}
+.th .sw i{position:absolute;left:14%;right:14%;height:9%;border-radius:4px}
+.th .sw i:nth-child(1){top:16%;height:12%}.th .sw i:nth-child(2){top:36%;opacity:.45}.th .sw i:nth-child(3){top:52%;height:22%;opacity:.25}
+.th span{display:block;font-size:13px;margin-top:6px;font-weight:600}
+.th[aria-checked="true"] .sw{box-shadow:0 0 0 3px var(--accent);transform:translateY(-2px)}
+.th:active .sw{transform:scale(.97)}
+
+/* photos */
+.drop{display:grid;place-items:center;gap:4px;text-align:center;border:1.5px dashed var(--hair);border-radius:16px;padding:22px;color:var(--ink2);cursor:pointer;transition:border-color .2s,background .2s}
+.drop:hover,.drop.over{border-color:var(--accent);background:#fff5f8}
+.drop b{color:var(--accent)}
+.drop input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.photos{display:grid;gap:10px;margin-top:12px}
+.ph{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;background:#fafafa;border-radius:14px;padding:10px}
+.ph img{width:72px;height:72px;object-fit:cover;border-radius:10px}
+.ph .fields{display:grid;gap:6px}
+.ph .inp{padding:8px 10px;font-size:15px;border-radius:10px}
+.ph .tools{display:grid;gap:4px}
+.icon{width:32px;height:32px;border-radius:50%;border:0;background:#fff;box-shadow:0 0 0 1px var(--hair);display:grid;place-items:center;cursor:pointer;color:var(--ink2)}
+.icon:hover{color:var(--ink)}.icon.del:hover{color:var(--err)}
+.icon[disabled]{opacity:.35;cursor:default}
+.msg{font-size:14px;margin:8px 0 0;min-height:20px}.msg.err{color:var(--err)}
+
+/* actions */
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:12px 22px;font-size:16px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn.p{background:var(--accent);color:#fff}.btn.p:hover{background:var(--accent-h)}
+.btn.s{background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--hair)}
+.btn.ghost{background:none;color:var(--ink2);padding:12px 8px}
+.btn.ghost.armed{color:var(--err)}
+
+/* preview */
+.pv{position:sticky;top:76px}
+.pv-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:14px;color:var(--ink2)}
+.phone{width:100%;max-width:360px;margin:0 auto;border-radius:46px;padding:11px;background:#111;box-shadow:0 30px 60px -24px rgba(0,0,0,.35)}
+.screen{position:relative;border-radius:36px;overflow:hidden;aspect-ratio:9/19;background:#fff}
+.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pv-note{font-size:13px;color:var(--ink2);text-align:center;margin-top:12px}
+.show-pv{display:none}
+@media(max-width:920px){
+  .pv{position:fixed;inset:0;z-index:40;background:rgba(245,245,247,.97);padding:70px 20px 20px;display:none;overflow:auto}
+  .pv.open{display:block}
+  .pv-close{display:inline-flex!important}
+  .show-pv{display:inline-flex;position:fixed;right:16px;bottom:16px;z-index:30;box-shadow:0 10px 24px -8px rgba(214,69,107,.6)}
+}
+.pv-close{display:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a href="./"><svg width="8" height="12" viewBox="0 0 8 12" aria-hidden="true"><path d="M6.5 1l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>เทมเพลตทั้งหมด</a>
+  <span class="save" id="save" role="status">บันทึกอัตโนมัติในเครื่องนี้</span>
+</div></header>
+
+<div class="layout">
+  <main>
+    <h1>สร้างเว็บเซอร์ไพรส์ของคุณ</h1>
+    <p class="lede">ใส่รูปและข้อความของคุณเอง ดูตัวอย่างได้ทันที ข้อมูลอยู่ในเครื่องคุณเท่านั้น ไม่ถูกส่งไปที่ใด</p>
+
+    <section class="panel" aria-labelledby="h-theme">
+      <h2 id="h-theme">เทมเพลต</h2><p class="hint">เปลี่ยนได้ตลอด ข้อมูลไม่หาย</p>
+      <div class="themes" role="radiogroup" aria-labelledby="h-theme" id="themes"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-names">
+      <h2 id="h-names">ชื่อและวันที่</h2><p class="hint">วันที่เริ่มคบใช้นับเวลาที่อยู่ด้วยกัน</p>
+      <div class="row">
+        <label class="f">ชื่อคุณ<input class="inp" data-k="from" maxlength="30" autocomplete="off"></label>
+        <label class="f">ชื่อคนพิเศษ<input class="inp" data-k="to" maxlength="30" autocomplete="off"></label>
+      </div>
+      <label class="f">วันและเวลาที่เริ่มคบ<input class="inp" type="datetime-local" data-k="since"></label>
+      <label class="f">ข้อความบนซองจดหมาย<input class="inp" data-k="envelopeText" maxlength="60"></label>
+    </section>
+
+    <section class="panel" aria-labelledby="h-letter">
+      <h2 id="h-letter">จดหมาย</h2><p class="hint">ข้อความจะค่อย ๆ พิมพ์ขึ้นทีละตัว ขึ้นบรรทัดใหม่ได้</p>
+      <label class="f"><span class="sr">ข้อความจดหมาย</span><textarea class="inp" data-k="letter" maxlength="1200" rows="7"></textarea><span class="count" id="letterCount"></span></label>
+    </section>
+
+    <section class="panel" aria-labelledby="h-photos">
+      <h2 id="h-photos">รูปความทรงจำ</h2><p class="hint">สูงสุด 12 รูป ใส่วันที่และคำบรรยายใต้รูปได้ รูปจะถูกย่อขนาดในเครื่องคุณ</p>
+      <label class="drop" id="drop">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-8 7"/></svg>
+        <span><b>เลือกรูป</b> หรือลากรูปมาวางตรงนี้</span>
+        <input type="file" id="file" accept="image/*" multiple>
+      </label>
+      <p class="msg" id="photoMsg" role="status"></p>
+      <div class="photos" id="photos"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-reasons">
+      <h2 id="h-reasons">เหตุผลที่รัก</h2><p class="hint">หนึ่งบรรทัดต่อหนึ่งข้อ แนะนำ 6 ข้อ</p>
+      <label class="f"><span class="sr">เหตุผลที่รัก</span><textarea class="inp" id="reasons" rows="6" maxlength="600"></textarea></label>
+    </section>
+
+    <section class="panel" aria-labelledby="h-ask">
+      <h2 id="h-ask">คำถามปิดท้าย</h2><p class="hint">ปุ่มปฏิเสธจะหนีไม่ให้กด</p>
+      <label class="f">คำถาม<input class="inp" data-k="question" maxlength="80"></label>
+      <div class="row">
+        <label class="f">ปุ่มตอบรับ<input class="inp" data-k="yes" maxlength="20"></label>
+        <label class="f">ปุ่มปฏิเสธ<input class="inp" data-k="no" maxlength="20"></label>
+      </div>
+      <div class="row">
+        <label class="f">หัวข้อหลังกดตอบรับ<input class="inp" data-k="answerTitle" maxlength="40"></label>
+        <label class="f">ข้อความหลังกดตอบรับ<input class="inp" data-k="answerText" maxlength="80"></label>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-done">
+      <h2 id="h-done">เสร็จแล้ว</h2><p class="hint">ดาวน์โหลดเป็นไฟล์เว็บไฟล์เดียว รวมรูปไว้แล้ว · อยากได้เป็นลิงก์ส่งทางแชทพร้อม QR code? <a href="https://line.me/ti/p/~tpb1234" target="_blank" rel="noopener" style="color:var(--accent)">ทัก LINE (฿99)</a></p>
+      <div class="actions">
+        <button class="btn p" id="dl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>ดาวน์โหลดเว็บ</button>
+        <button class="btn s" id="full">เปิดดูแบบเต็มจอ</button>
+        <button class="btn ghost" id="reset">เริ่มใหม่</button>
+      </div>
+      <p class="msg" id="doneMsg" role="status"></p>
+    </section>
+  </main>
+
+  <aside class="pv" id="pv" aria-label="ตัวอย่าง">
+    <div class="pv-head"><span>ตัวอย่างบนมือถือ</span><button class="btn s pv-close" id="pvClose" style="padding:8px 16px">ปิด</button></div>
+    <div class="phone"><div class="screen"><iframe id="frame" title="ตัวอย่างเว็บ" src="view.html?preview=1"></iframe></div></div>
+    <p class="pv-note">ตัวอย่างแสดงแบบย่อ กด "เปิดดูแบบเต็มจอ" เพื่อดูซองจดหมายและแอนิเมชันทั้งหมด</p>
+  </aside>
+</div>
+<button class="btn p show-pv" id="showPv">ดูตัวอย่าง</button>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const THEMES = [
+    { id: 'blush', name: 'Blush', bg: '#fff6f3', a: '#d6456b', b: '#3a2a2e' },
+    { id: 'midnight', name: 'Midnight', bg: '#0d1230', a: '#ffcf6e', b: '#eef0ff' },
+    { id: 'film', name: 'Film', bg: '#f3ece0', a: '#b5523b', b: '#2f2a24' },
+    { id: 'garden', name: 'Garden', bg: '#f2f5ef', a: '#4f7a5a', b: '#26332a' },
+    { id: 'mono', name: 'Mono', bg: '#ffffff', a: '#111111', b: '#6e6e73' }
+  ];
+  const DEFAULT = {
+    theme: 'blush', from: 'เจ', to: 'มิว', since: '2023-02-14T19:30', envelopeText: 'มีบางอย่างอยากให้ดู',
+    letter: 'ถึงมิว\n\nขอบคุณที่อยู่ข้างกันในทุกวัน ทั้งวันที่ดีและวันที่เหนื่อย\nอยากบอกว่ารักนะ และจะรักไปเรื่อย ๆ',
+    memories: [], reasons: ['ยิ้มแล้วโลกสดใส', 'ใจดีกับทุกคน', 'ฟังเราเสมอ', 'อยู่ด้วยแล้วสบายใจ', 'หัวเราะเสียงดังที่สุด', 'เป็นตัวเองได้เวลาอยู่ด้วยกัน'],
+    question: 'อยู่ด้วยกันไปนาน ๆ นะ?', yes: 'ตกลง', no: 'ไม่', answerTitle: 'รักที่สุดเลย', answerText: 'สุขสันต์วันครบรอบนะ', music: ''
+  };
+  const MAX_PHOTOS = 12;
+  let D = structuredClone(DEFAULT);
+  const qsTheme = new URLSearchParams(location.search).get('t');
+
+  // ---------- storage (IndexedDB, falls back to memory) ----------
+  const DB = (() => {
+    let dbp = null;
+    function open() { if (!dbp) dbp = new Promise((res, rej) => { try { const r = indexedDB.open('love-builder', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }); return dbp; }
+    return {
+      async get(k) { const db = await open(); return new Promise((res, rej) => { const t = db.transaction('kv').objectStore('kv').get(k); t.onsuccess = () => res(t.result); t.onerror = () => rej(t.error); }); },
+      async set(k, v) { const db = await open(); return new Promise((res, rej) => { const t = db.transaction('kv', 'readwrite'); t.objectStore('kv').put(v, k); t.oncomplete = res; t.onerror = () => rej(t.error); }); }
+    };
+  })();
+  const saveEl = $('save'); let saveT;
+  function status(text, cls) { saveEl.textContent = text; saveEl.className = 'save ' + (cls || ''); }
+  function queueSave() {
+    clearTimeout(saveT); status('กำลังบันทึก…');
+    saveT = setTimeout(async () => { try { await DB.set('draft', D); status('บันทึกแล้ว', 'ok'); } catch { status('บันทึกในเครื่องไม่ได้ (โหมดส่วนตัว?) — ดาวน์โหลดก่อนปิดหน้า', 'err'); } }, 400);
+  }
+
+  // ---------- preview ----------
+  const frame = $('frame'); let ready = false, pvT;
+  addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.type === 'love-ready') { ready = true; push(); } });
+  function push() { if (ready) frame.contentWindow.postMessage({ type: 'love-data', data: D }, location.origin); }
+  frame.addEventListener('load', () => { ready = true; push(); });
+  try { if (frame.contentDocument && frame.contentDocument.readyState === 'complete' && frame.contentWindow.location.href.includes('view.html')) ready = true; } catch {}
+  function changed() { clearTimeout(pvT); pvT = setTimeout(push, 150); queueSave(); }
+
+  // ---------- themes ----------
+  $('themes').innerHTML = THEMES.map(t => `<button class="th" role="radio" aria-checked="false" data-t="${t.id}"><span class="sw" style="background:${t.bg}"><i style="background:${t.a}"></i><i style="background:${t.b}"></i><i style="background:${t.a}"></i></span><span>${t.name}</span></button>`).join('');
+  const themeBtns = [...document.querySelectorAll('.th')];
+  function setTheme(id) { D.theme = id; themeBtns.forEach(b => { const on = b.dataset.t === id; b.setAttribute('aria-checked', on); b.tabIndex = on ? 0 : -1; }); }
+  themeBtns.forEach((b, i) => {
+    b.addEventListener('click', () => { setTheme(b.dataset.t); changed(); });
+    b.addEventListener('keydown', e => { const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (!k) return; e.preventDefault(); const n = themeBtns[(i + k + themeBtns.length) % themeBtns.length]; setTheme(n.dataset.t); n.focus(); changed(); });
+  });
+
+  // ---------- simple fields ----------
+  const fields = [...document.querySelectorAll('[data-k]')];
+  fields.forEach(el => el.addEventListener('input', () => { D[el.dataset.k] = el.value; if (el.dataset.k === 'letter') countLetter(); changed(); }));
+  function countLetter() { $('letterCount').textContent = (D.letter || '').length + ' / 1200'; }
+  $('reasons').addEventListener('input', e => { D.reasons = e.target.value.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 12); changed(); });
+
+  // ---------- photos ----------
+  const msg = $('photoMsg');
+  function say(t, err) { msg.textContent = t; msg.className = 'msg' + (err ? ' err' : ''); }
+  async function toDataURL(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url; });
+      const s = Math.min(1, 1000 / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      return c.toDataURL('image/jpeg', .82);
+    } finally { URL.revokeObjectURL(url); }
+  }
+  async function addFiles(files) {
+    const imgs = [...files].filter(f => f.type.startsWith('image/') || /\.(heic|heif)$/i.test(f.name));
+    if (!imgs.length) return say('กรุณาเลือกไฟล์รูปภาพ', true);
+    const room = MAX_PHOTOS - D.memories.length;
+    if (room <= 0) return say('ใส่ได้สูงสุด ' + MAX_PHOTOS + ' รูป', true);
+    say('กำลังเตรียมรูป…'); let ok = 0, bad = 0;
+    for (const f of imgs.slice(0, room)) {
+      try { D.memories.push({ img: await toDataURL(f), date: '', text: '' }); ok++; } catch { bad++; }
+    }
+    renderPhotos(); changed();
+    const extra = imgs.length > room ? ` (เกิน ${MAX_PHOTOS} รูป ใส่ได้แค่ ${room})` : '';
+    say(bad ? `เพิ่ม ${ok} รูป · เปิดไม่ได้ ${bad} รูป ลองแปลงเป็น JPG ก่อน${extra}` : `เพิ่มแล้ว ${ok} รูป${extra}`, !!bad);
+  }
+  $('file').addEventListener('change', e => { addFiles(e.target.files); e.target.value = ''; });
+  const drop = $('drop');
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+
+  const up = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 15l6-6 6 6"/></svg>';
+  const down = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>';
+  const x = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  function renderPhotos() {
+    const box = $('photos'); box.innerHTML = '';
+    D.memories.forEach((m, i) => {
+      const row = document.createElement('div'); row.className = 'ph';
+      row.innerHTML = `<img alt="รูปที่ ${i + 1}"><div class="fields"><input class="inp" placeholder="วันที่ เช่น 14 ก.พ. 2024" maxlength="40" aria-label="วันที่ของรูปที่ ${i + 1}"><input class="inp" placeholder="คำบรรยายใต้รูป" maxlength="120" aria-label="คำบรรยายรูปที่ ${i + 1}"></div>
+        <div class="tools"><button class="icon" aria-label="เลื่อนขึ้น" ${i === 0 ? 'disabled' : ''}>${up}</button><button class="icon" aria-label="เลื่อนลง" ${i === D.memories.length - 1 ? 'disabled' : ''}>${down}</button><button class="icon del" aria-label="ลบรูปที่ ${i + 1}">${x}</button></div>`;
+      row.querySelector('img').src = m.img;
+      const [d, t] = row.querySelectorAll('input'); d.value = m.date || ''; t.value = m.text || '';
+      d.addEventListener('input', () => { m.date = d.value; changed(); }); t.addEventListener('input', () => { m.text = t.value; changed(); });
+      const [bu, bd, bx] = row.querySelectorAll('button');
+      bu.onclick = () => { [D.memories[i - 1], D.memories[i]] = [D.memories[i], D.memories[i - 1]]; renderPhotos(); changed(); };
+      bd.onclick = () => { [D.memories[i + 1], D.memories[i]] = [D.memories[i], D.memories[i + 1]]; renderPhotos(); changed(); };
+      bx.onclick = () => { D.memories.splice(i, 1); renderPhotos(); changed(); say('ลบรูปแล้ว'); };
+      box.append(row);
+    });
+    drop.style.display = D.memories.length >= MAX_PHOTOS ? 'none' : '';
+  }
+
+  // ---------- fill form ----------
+  function fill() {
+    fields.forEach(el => el.value = D[el.dataset.k] ?? '');
+    $('reasons').value = (D.reasons || []).join('\n');
+    setTheme(D.theme); countLetter(); renderPhotos();
+  }
+
+  // ---------- export ----------
+  async function buildHTML() {
+    const res = await fetch('view.html', { cache: 'no-store' }); if (!res.ok) throw new Error('load');
+    let html = await res.text();
+    const data = { ...D, demo: false };
+    const json = JSON.stringify(data).replace(/</g, '\\u003c').replace(/[\u2028\u2029]/g, '');
+    const marker = '<script>\nconst LOVE_DEMO';
+    if (!html.includes(marker)) throw new Error('marker');
+    return html.replace(marker, `<script>window.LOVE_DATA=${json};<\/script>\n` + marker);
+  }
+  const doneMsg = $('doneMsg');
+  function done(t, err) { doneMsg.textContent = t; doneMsg.className = 'msg' + (err ? ' err' : ''); }
+  function check() {
+    if (!D.from || !D.to) { done('ใส่ชื่อทั้งสองคนก่อนนะ', true); return false; }
+    return true;
+  }
+  $('dl').addEventListener('click', async () => {
+    if (!check()) return; done('กำลังสร้างไฟล์…');
+    try {
+      const blob = new Blob([await buildHTML()], { type: 'text/html' });
+      const name = ('love-' + (D.to || 'page')).replace(/[\\/:*?"<>|\s]+/g, '-') + '.html';
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: name });
+      document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      done(`ดาวน์โหลด ${name} แล้ว (${(blob.size / 1048576).toFixed(1)} MB)`);
+    } catch { done('สร้างไฟล์ไม่สำเร็จ ลองใหม่อีกครั้ง', true); }
+  });
+  $('full').addEventListener('click', async () => {
+    const w = window.open('', '_blank');
+    try { const blob = new Blob([await buildHTML()], { type: 'text/html' }); const u = URL.createObjectURL(blob); if (w) w.location = u; else location.href = u; }
+    catch { if (w) w.close(); done('เปิดตัวอย่างไม่สำเร็จ', true); }
+  });
+  const resetBtn = $('reset'); let armed = false, armT;
+  resetBtn.addEventListener('click', () => {
+    if (!armed) { armed = true; resetBtn.classList.add('armed'); resetBtn.textContent = 'กดอีกครั้งเพื่อล้างทั้งหมด'; armT = setTimeout(() => { armed = false; resetBtn.classList.remove('armed'); resetBtn.textContent = 'เริ่มใหม่'; }, 3500); return; }
+    clearTimeout(armT); armed = false; resetBtn.classList.remove('armed'); resetBtn.textContent = 'เริ่มใหม่';
+    D = structuredClone(DEFAULT); if (qsTheme) D.theme = qsTheme; fill(); changed(); done('ล้างข้อมูลแล้ว'); say('');
+  });
+
+  // ---------- mobile preview toggle ----------
+  $('showPv').addEventListener('click', () => { $('pv').classList.add('open'); $('pvClose').focus(); });
+  $('pvClose').addEventListener('click', () => { $('pv').classList.remove('open'); $('showPv').focus(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') $('pv').classList.remove('open'); });
+
+  // ---------- load draft ----------
+  (async () => {
+    try { const saved = await DB.get('draft'); if (saved && typeof saved === 'object') { D = { ...structuredClone(DEFAULT), ...saved }; status('โหลดงานที่บันทึกไว้แล้ว', 'ok'); } } catch {}
+    if (qsTheme && THEMES.some(t => t.id === qsTheme)) D.theme = qsTheme;
+    fill(); push();
+  })();
+})();
+</script>
+</body>
+</html>

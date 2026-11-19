@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>สำหรับเธอ</title>
+<meta name="description" content="มีบางอย่างอยากให้ดู">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Sarabun PSK";src:local("TH Sarabun PSK"),local("THSarabunPSK"),local("TH SarabunPSK"),local("TH Sarabun New"),local("THSarabunNew");size-adjust:128%;unicode-range:U+0E00-0E7F}
+:root{--font:"Inter","Sarabun PSK","Sarabun",system-ui,sans-serif;--ease:cubic-bezier(.22,.8,.26,1);color-scheme:light}
+/* ---------- 5 themes ---------- */
+[data-theme=blush]{--bg:#fff6f3;--paper:#fff;--ink:#3a2a2e;--muted:#8a7378;--accent:#d6456b;--soft:#f9dfe5;--line:#f0dfe2;--on:#fff}
+[data-theme=midnight]{--bg:#0d1230;--paper:#161c42;--ink:#eef0ff;--muted:#a3a9d6;--accent:#ffcf6e;--soft:#2a3170;--line:#2a3168;--on:#1a1630;color-scheme:dark}
+[data-theme=film]{--bg:#f3ece0;--paper:#fffdf8;--ink:#2f2a24;--muted:#7d7266;--accent:#b5523b;--soft:#ead9c3;--line:#e2d6c3;--on:#fff}
+[data-theme=garden]{--bg:#f2f5ef;--paper:#fff;--ink:#26332a;--muted:#6b7a6e;--accent:#4f7a5a;--soft:#dde8dc;--line:#dfe6dc;--on:#fff}
+[data-theme=mono]{--bg:#fff;--paper:#fff;--ink:#111;--muted:#6e6e73;--accent:#111;--soft:#f2f2f2;--line:#e5e5e5;--on:#fff}
+
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:19px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{width:min(720px,100% - 40px);margin-inline:auto}
+section{padding:clamp(72px,12vw,120px) 0}
+h1,h2{margin:0;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:clamp(30px,6vw,44px);line-height:1.2;text-align:center}
+.sub{color:var(--muted);text-align:center;margin:10px 0 0}
+
+/* theme flavour */
+[data-theme=midnight] body,body[data-theme=midnight]{background:radial-gradient(1px 1px at 20% 30%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 70% 12%,#fff9 50%,transparent 51%),radial-gradient(1.5px 1.5px at 40% 70%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 85% 55%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 10% 85%,#fff6 50%,transparent 51%),linear-gradient(#0b0f2a,#141a45);background-size:340px 340px,280px 280px,420px 420px,300px 300px,380px 380px,100% 100%;background-attachment:fixed}
+body[data-theme=mono] h1,body[data-theme=mono] h2{text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+body[data-theme=mono] .names span{color:var(--ink)!important}
+body[data-theme=film] .mem{transform:rotate(-1.6deg);border-radius:4px;padding:12px 12px 4px;box-shadow:0 14px 30px -18px rgba(47,42,36,.6)}
+body[data-theme=film] .mem:nth-child(even){transform:rotate(1.4deg)}
+body[data-theme=film] .mem img{border-radius:2px}
+body[data-theme=film] .letter{border-radius:6px;background-image:repeating-linear-gradient(transparent 0 33px,#eadfcd 33px 34px)}
+body[data-theme=garden] .card .f,body[data-theme=garden] .mem,body[data-theme=garden] .letter{border-radius:28px 8px 28px 8px}
+
+/* intro */
+#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:var(--bg);transition:opacity .8s var(--ease),visibility .8s}
+#intro.gone{opacity:0;visibility:hidden}
+.envelope{all:unset;cursor:pointer;display:grid;justify-items:center;gap:22px;text-align:center;padding:24px}
+.env{position:relative;width:min(260px,70vw);aspect-ratio:3/2;background:var(--paper);border-radius:14px;box-shadow:0 20px 50px -24px var(--accent),0 0 0 1px var(--line);overflow:hidden}
+.env::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49.5%,var(--line) 50%,transparent 50.5%),linear-gradient(to bottom left,transparent 49.5%,var(--line) 50%,transparent 50.5%)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:55%;background:var(--soft);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s var(--ease)}
+.env .seal{position:absolute;left:50%;top:44%;width:44px;height:44px;margin-left:-22px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--on);animation:pulse 1.8s ease-in-out infinite}
+.envelope:hover .flap,.envelope:focus-visible .flap{transform:rotateX(25deg)}
+.env-label{font-size:22px;font-weight:600}
+.env-hint{color:var(--muted);font-size:16px;margin-top:-14px}
+@keyframes pulse{50%{transform:scale(1.08)}}
+
+/* hero */
+.hero{min-height:100svh;display:grid;place-items:center;align-content:center;text-align:center;position:relative;overflow:hidden;padding:80px 0 110px}
+.preview .hero{min-height:640px}
+.hero .wrap{position:relative;z-index:1}
+.hero-photo{margin:0 auto 22px;width:150px;height:150px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 6px var(--paper),0 18px 40px -18px rgba(0,0,0,.45)}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-photo[hidden]{display:none}
+body[data-theme=film] .hero-photo{width:170px;height:206px;border-radius:2px;background:var(--paper);padding:10px 10px 36px;transform:rotate(-3deg);box-shadow:0 18px 34px -16px rgba(47,42,36,.55)}
+body[data-theme=garden] .hero-photo{width:160px;height:204px;border-radius:100px 100px 14px 14px}
+body[data-theme=mono] .hero-photo{width:min(260px,70vw);height:170px;border-radius:0;box-shadow:none;filter:grayscale(1) contrast(1.05)}
+body[data-theme=midnight] .hero-photo{position:absolute;inset:0;width:auto;height:auto;margin:0;border-radius:0;box-shadow:none;opacity:.3;z-index:0;-webkit-mask-image:linear-gradient(transparent,#000 30%,#000 60%,transparent);mask-image:linear-gradient(transparent,#000 30%,#000 60%,transparent)}
+.names{font-size:clamp(44px,11vw,88px);line-height:1.05;font-weight:700}
+.names span{color:var(--accent)}
+.since{margin-top:16px;color:var(--muted);font-size:18px}
+.counter{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,2.4vw,18px);margin:28px auto 0;max-width:520px}
+.counter div{background:var(--paper);border-radius:16px;padding:12px 4px;box-shadow:0 0 0 1px var(--line)}
+.counter b{display:block;font-size:clamp(22px,6vw,40px);font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1;font-family:"Inter",var(--font)}
+.counter span{font-size:14px;color:var(--muted)}
+.preview .scroll-hint{display:none}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:14px;display:grid;justify-items:center;gap:6px}
+.scroll-hint i{width:1px;height:34px;background:linear-gradient(var(--muted),transparent);animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.floaty{position:absolute;color:var(--accent);opacity:.18;animation:float 9s ease-in-out infinite;width:36px}
+@keyframes float{50%{transform:translateY(-22px) rotate(8deg)}}
+
+/* letter */
+.letter{background:var(--paper);border-radius:24px;padding:clamp(28px,6vw,48px);box-shadow:0 30px 60px -36px rgba(0,0,0,.35),0 0 0 1px var(--line);margin-top:36px}
+.letter p{margin:0;white-space:pre-line;font-size:20px;line-height:1.7;min-height:6em}
+.letter .sign{margin-top:22px;text-align:right;color:var(--accent);font-weight:600}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* memories */
+.memories{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px max(20px,calc((100vw - 720px)/2)) 16px;scrollbar-width:none}
+.memories::-webkit-scrollbar{display:none}
+.mem{flex:0 0 min(78vw,360px);scroll-snap-align:center;margin:0;background:var(--paper);border-radius:22px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 24px 40px -30px rgba(0,0,0,.4)}
+.mem img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--soft)}
+.mem figcaption{padding:14px 18px 18px}
+.mem small{color:var(--accent);font-weight:600;font-size:14px}
+.mem p{margin:2px 0 0;font-size:18px}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);transition:background .3s,width .3s}
+.dots button[aria-current="true"]{background:var(--accent);width:22px;border-radius:4px}
+.empty{color:var(--muted);text-align:center;padding:24px}
+
+/* reasons */
+.reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:36px}
+@media(min-width:640px){.reasons{grid-template-columns:repeat(3,1fr)}}
+.card{perspective:900px;border:0;padding:0;background:none;aspect-ratio:1/1;text-align:center;color:inherit}
+.card .in{position:relative;width:100%;height:100%;transition:transform .7s var(--ease);transform-style:preserve-3d}
+.card[aria-pressed="true"] .in{transform:rotateY(180deg)}
+.card .f,.card .b{position:absolute;inset:0;border-radius:20px;display:grid;place-items:center;padding:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.card .f{background:var(--paper);box-shadow:0 0 0 1px var(--line);color:var(--accent);font-weight:700;font-size:34px;font-family:"Inter",var(--font)}
+.card .f small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:-6px}
+.card .b{background:var(--accent);color:var(--on);transform:rotateY(180deg);font-size:17px;line-height:1.5}
+
+/* question */
+.ask{text-align:center}
+.ask .q{font-size:clamp(30px,6.5vw,46px);line-height:1.25}
+.choices{position:relative;height:150px;margin-top:36px}
+.yes,.no{position:absolute;top:30px;border:0;border-radius:999px;padding:14px 34px;font-size:20px;font-weight:600;transition:transform .2s var(--ease),left .35s var(--ease),top .35s var(--ease)}
+.yes{left:calc(50% - 150px);background:var(--accent);color:var(--on)}
+.yes:active{transform:scale(.96)}
+.no{left:calc(50% + 30px);background:var(--paper);color:var(--muted);box-shadow:0 0 0 1px var(--line)}
+.answer{display:none;margin-top:8px}
+.answer.show{display:block;animation:rise .8s var(--ease)}
+.answer h3{font-size:clamp(28px,6vw,40px);margin:0;color:var(--accent)}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.burst{position:fixed;pointer-events:none;z-index:30;color:var(--accent)}
+
+.music{position:fixed;right:16px;bottom:16px;z-index:10;width:48px;height:48px;border-radius:50%;border:0;background:var(--paper);color:var(--accent);box-shadow:0 8px 20px -6px rgba(0,0,0,.3),0 0 0 1px var(--line);display:none;place-items:center}
+.music.on{display:grid}
+footer{padding:40px 20px 60px;text-align:center;color:var(--muted);font-size:12px;line-height:1.5}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in,.preview .reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body data-theme="blush">
+
+<div id="intro" role="dialog" aria-label="เปิดซองจดหมาย">
+  <button class="envelope" id="openBtn" aria-label="แตะเพื่อเปิด">
+    <div class="env" aria-hidden="true"><div class="flap"></div><div class="seal" id="seal"></div></div>
+    <div class="env-label" id="envText"></div>
+    <div class="env-hint">แตะเพื่อเปิด</div>
+  </button>
+</div>
+
+<main>
+  <header class="hero">
+    <span class="floaty" style="left:8%;top:18%"></span><span class="floaty" style="right:10%;top:30%;width:26px;animation-delay:-3s"></span><span class="floaty" style="left:16%;bottom:20%;width:22px;animation-delay:-6s"></span>
+    <div class="hero-photo reveal" id="heroPhoto" hidden><img id="heroImg" alt=""></div>
+    <div class="wrap">
+      <h1 class="names reveal"><span id="nFrom"></span> &amp; <span id="nTo"></span></h1>
+      <p class="since reveal">เราอยู่ด้วยกันมาแล้ว</p>
+      <div class="counter reveal"><div><b id="cD">0</b><span>วัน</span></div><div><b id="cH">0</b><span>ชั่วโมง</span></div><div><b id="cM">0</b><span>นาที</span></div><div><b id="cS">0</b><span>วินาที</span></div></div>
+      <p class="sub reveal" id="sinceText"></p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">เลื่อนลง<i></i></div>
+  </header>
+
+  <section id="letterSec">
+    <div class="wrap">
+      <h2 class="reveal">จดหมายถึง<span id="toName2"></span></h2>
+      <div class="letter reveal" id="letterBox"><p id="letter" aria-live="polite"></p><div class="sign" id="sign"></div></div>
+    </div>
+  </section>
+
+  <section id="memSec" style="padding-left:0;padding-right:0">
+    <div class="wrap"><h2 class="reveal">ความทรงจำของเรา</h2><p class="sub reveal">เลื่อนดูทีละรูป</p></div>
+    <div class="memories reveal" id="mems" tabindex="0" aria-label="รูปความทรงจำ"></div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <section id="reaSec">
+    <div class="wrap"><h2 class="reveal">เหตุผลที่รัก</h2><p class="sub reveal">แตะการ์ดเพื่อเปิดทีละใบ</p><div class="reasons" id="reasons"></div></div>
+  </section>
+
+  <section class="ask">
+    <div class="wrap">
+      <h2 class="q reveal" id="question"></h2>
+      <div class="choices" id="choices"><button class="yes" id="yesBtn"></button><button class="no" id="noBtn"></button></div>
+      <div class="answer" id="answer" role="status"><h3 id="ansTitle"></h3><p class="sub" id="ansText"></p></div>
+    </div>
+  </section>
+</main>
+
+<button class="music" id="musicBtn" aria-label="เปิดเพลง" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
+<footer id="credits"></footer>
+
+<script>
+const LOVE_DEMO = {
+  theme: "blush", from: "เจ", to: "มิว", since: "2023-02-14T19:30",
+  envelopeText: "มีบางอย่างอยากให้มิวดู",
+  letter: "ถึงมิว\n\nขอบคุณที่อยู่ข้างกันในทุกวัน ทั้งวันที่ดีและวันที่เหนื่อย\nเราอาจไม่ใช่คนพูดเก่ง เลยทำหน้านี้ขึ้นมาแทนคำพูด\nอยากบอกว่ารักนะ และจะรักไปเรื่อย ๆ",
+  memories: [
+    { img: "img/p1.jpg", date: "14 ก.พ. 2023", text: "วันแรกที่เราไปดูพระอาทิตย์ตกด้วยกัน" },
+    { img: "img/p2.jpg", date: "3 มิ.ย. 2023", text: "คาเฟ่ร้านโปรด สั่งเมนูเดิมทุกครั้ง" },
+    { img: "img/p3.jpg", date: "14 ก.พ. 2024", text: "ช่อดอกไม้ช่อแรกที่ให้" },
+    { img: "img/p4.jpg", date: "12 เม.ย. 2025", text: "ทริปทะเลที่เดินกันจนเท้าเปื่อย" }
+  ],
+  reasons: ["ยิ้มแล้วโลกสดใส", "ใจดีกับทุกคน", "ฟังเราเสมอ", "ทำกับข้าวอร่อย", "หัวเราะเสียงดังที่สุด", "อยู่ด้วยแล้วสบายใจ"],
+  question: "อยู่ด้วยกันไปนาน ๆ นะ?", yes: "ตกลง", no: "ไม่",
+  answerTitle: "รักที่สุดเลย", answerText: "สุขสันต์วันครบรอบนะ", music: "", demo: true
+};
+(() => {
+  const $ = id => document.getElementById(id);
+  const qs = new URLSearchParams(location.search);
+  const preview = qs.has('preview');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const THEMES = ['blush', 'midnight', 'film', 'garden', 'mono'];
+  const ICON = {
+    heart: '<svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6C12 6.1 13.6 5 15.6 5 19 5 21 8.4 19.6 11.7 17.5 16.4 12 21 12 21z"/></svg>',
+    star: '<svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.2l7.1-.6z"/></svg>',
+    leaf: '<svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%"><path d="M20 3C9 3 4 9 4 16c0 1.7.4 3.1 1 4l1.5-1.5C8 14 11 11 15 9c-3.5 2.7-6 6-7.2 9.6 1 .3 2 .4 3.2.4C18 19 21 12 20 3z"/></svg>',
+    dot: '<svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%"><circle cx="12" cy="12" r="5"/></svg>'
+  };
+  const iconFor = t => t === 'midnight' ? ICON.star : t === 'garden' ? ICON.leaf : t === 'mono' ? ICON.dot : ICON.heart;
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let L = window.LOVE_DATA || LOVE_DEMO;
+  if (qs.get('theme') && THEMES.includes(qs.get('theme'))) L = { ...L, theme: qs.get('theme') };
+  if (preview) document.documentElement.classList.add('preview');
+
+  let start = new Date(), typed = false;
+  function render(data) {
+    L = data;
+    const theme = THEMES.includes(L.theme) ? L.theme : 'blush';
+    document.body.dataset.theme = theme;
+    document.querySelectorAll('.floaty').forEach(f => f.innerHTML = iconFor(theme));
+    if ($('seal')) $('seal').innerHTML = `<span style="width:20px;height:20px;display:block">${iconFor(theme)}</span>`;
+    if ($('envText')) $('envText').textContent = L.envelopeText || 'มีบางอย่างอยากให้ดู';
+    $('nFrom').textContent = L.from || '…'; $('nTo').textContent = L.to || '…'; $('toName2').textContent = L.to || '';
+    $('sign').textContent = L.from ? 'รัก, ' + L.from : '';
+    $('question').textContent = L.question || ''; $('yesBtn').textContent = L.yes || 'ตกลง'; $('noBtn').textContent = L.no || 'ไม่';
+    $('ansTitle').textContent = L.answerTitle || ''; $('ansText').textContent = L.answerText || '';
+    document.title = L.to ? 'สำหรับ' + L.to : 'สำหรับเธอ';
+    start = new Date(L.since || Date.now());
+    $('sinceText').textContent = isNaN(start) ? '' : 'ตั้งแต่ ' + start.toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' });
+    tick();
+    if (preview || typed) $('letter').textContent = L.letter || '';
+    // memories
+    const mems = $('mems'), dots = $('dots'); mems.innerHTML = ''; dots.innerHTML = '';
+    const list = (L.memories || []).filter(m => m.img);
+    $('heroPhoto').hidden = !list.length; if (list.length) $('heroImg').src = list[0].img;
+    $('memSec').hidden = !list.length && !preview;
+    if (!list.length) mems.innerHTML = '<p class="empty">ยังไม่มีรูป</p>';
+    list.forEach((m, i) => {
+      mems.insertAdjacentHTML('beforeend', `<figure class="mem"><img src="${esc(m.img)}" alt="${esc(m.text || 'รูปความทรงจำ')}" loading="lazy"><figcaption>${m.date ? `<small>${esc(m.date)}</small>` : ''}${m.text ? `<p>${esc(m.text)}</p>` : ''}</figcaption></figure>`);
+      const b = document.createElement('button'); b.setAttribute('aria-label', 'รูปที่ ' + (i + 1)); b.setAttribute('aria-current', i === 0);
+      b.onclick = () => mems.children[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+      dots.append(b);
+    });
+    // reasons
+    const rs = (L.reasons || []).filter(Boolean); $('reaSec').hidden = !rs.length && !preview;
+    $('reasons').innerHTML = rs.map((r, i) => `<button class="card" aria-pressed="false" data-label="เหตุผลข้อที่ ${i + 1}" aria-label="เหตุผลข้อที่ ${i + 1}"><div class="in"><div class="f"><div>${i + 1}<small>แตะเพื่อเปิด</small></div></div><div class="b">${esc(r)}</div></div></button>`).join('');
+    $('reasons').querySelectorAll('.card').forEach(c => c.addEventListener('click', () => {
+      const on = c.getAttribute('aria-pressed') !== 'true'; c.setAttribute('aria-pressed', on);
+      c.setAttribute('aria-label', on ? c.querySelector('.b').textContent : c.dataset.label);
+    }));
+    $('credits').textContent = L.demo ? 'ภาพตัวอย่างจาก Wikimedia Commons (CC0)' : '';
+    setupMusic();
+  }
+
+  function tick() {
+    let s = Math.max(0, Math.floor((Date.now() - start) / 1000)); if (isNaN(s)) s = 0;
+    const d = Math.floor(s / 86400); s -= d * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60;
+    $('cD').textContent = d.toLocaleString('th-TH'); $('cH').textContent = h; $('cM').textContent = m; $('cS').textContent = s;
+  }
+  setInterval(tick, 1000);
+
+  $('mems').addEventListener('scroll', () => {
+    const mems = $('mems'), c = mems.scrollLeft + mems.clientWidth / 2; let best = 0, bd = 1e9;
+    [...mems.children].forEach((el, i) => { const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - c); if (d < bd) { bd = d; best = i; } });
+    [...$('dots').children].forEach((d, i) => d.setAttribute('aria-current', i === best));
+  }, { passive: true });
+
+  function typeLetter() {
+    if (typed) return; typed = true;
+    const el = $('letter'), text = L.letter || '';
+    if (reduce || preview) { el.textContent = text; return; }
+    let i = 0; const step = () => { i++; el.innerHTML = esc(text.slice(0, i)) + '<span class="caret"></span>'; if (i < text.length) setTimeout(step, text[i - 1] === '\n' ? 260 : 45); else el.textContent = text; };
+    step();
+  }
+
+  // music (optional, only a file the owner has rights to)
+  const mb = $('musicBtn'); let audio = null;
+  function setupMusic() { if (audio) { audio.pause(); audio = null; } mb.classList.toggle('on', !!L.music && !preview); if (L.music && !preview) { audio = new Audio(L.music); audio.loop = true; } }
+  mb.addEventListener('click', () => { if (!audio) return; if (audio.paused) { audio.play(); mb.setAttribute('aria-pressed', 'true'); } else { audio.pause(); mb.setAttribute('aria-pressed', 'false'); } });
+
+  // "no" dodges, "yes" answers
+  const no = $('noBtn'), box = $('choices'); let moves = 0;
+  function dodge(e) { if (e) e.preventDefault(); moves++; no.style.left = Math.random() * Math.max(0, box.clientWidth - no.offsetWidth) + 'px'; no.style.top = Math.random() * Math.max(0, box.clientHeight - no.offsetHeight) + 'px'; if (moves > 4) no.textContent = 'แน่ใจเหรอ'; }
+  no.addEventListener('mouseenter', dodge); no.addEventListener('click', dodge); no.addEventListener('touchstart', dodge, { passive: false });
+  $('yesBtn').addEventListener('click', e => { const r = e.currentTarget.getBoundingClientRect(); burst(r.left + r.width / 2, r.top, 36); box.style.display = 'none'; $('answer').classList.add('show'); });
+  function burst(x, y, n) {
+    if (reduce) return;
+    for (let i = 0; i < n; i++) {
+      const h = document.createElement('div'); h.className = 'burst'; h.innerHTML = iconFor(document.body.dataset.theme);
+      const size = 12 + Math.random() * 18; Object.assign(h.style, { left: x + 'px', top: y + 'px', width: size + 'px', height: size + 'px' });
+      document.body.append(h); const a = Math.random() * Math.PI * 2, d = 60 + Math.random() * 160;
+      h.animate([{ transform: 'translate(-50%,-50%) scale(.4)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px, ${Math.sin(a) * d - 120}px) scale(1)`, opacity: 0 }], { duration: 1100 + Math.random() * 700, easing: 'cubic-bezier(.2,.7,.3,1)' }).onfinish = () => h.remove();
+    }
+  }
+
+  render(L);
+
+  // reveal / intro
+  if (preview) {
+    $('intro').remove(); typed = true;
+    addEventListener('message', e => { if (e.origin === location.origin && e.data && e.data.type === 'love-data') render(e.data.data); });
+    parent.postMessage({ type: 'love-ready' }, location.origin);
+  } else {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); if (e.target.id === 'letterBox') typeLetter(); io.unobserve(e.target); }), { threshold: .2 });
+    document.querySelectorAll('.reveal').forEach(el => reduce ? (el.classList.add('in'), el.id === 'letterBox' && typeLetter()) : io.observe(el));
+    const main = document.querySelector('main'); main.inert = true; document.body.style.overflow = 'hidden';
+    $('openBtn').addEventListener('click', () => {
+      $('intro').classList.add('gone'); main.inert = false; document.body.style.overflow = '';
+      burst(innerWidth / 2, innerHeight / 2, 18);
+      if (audio) audio.play().then(() => mb.setAttribute('aria-pressed', 'true')).catch(() => {});
+    });
+  }
+})();
+</script>
+</body>
+</html>
