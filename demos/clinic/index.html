@@ -5,33 +5,50 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>คลินิกยิ้มสวย — ตัวอย่างเว็บไซต์จองคิว</title>
 <meta name="description" content="ตัวอย่างเว็บไซต์คลินิกพร้อมแบบฟอร์มจองคิว (Portfolio demo)">
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f8fb;--ink:#14212b;--muted:#5d6b76;--accent:#1f7a8c;--card:#fff;--line:#dbe5ec;--ok:#2e7d4f}
+@font-face{font-family:"Sarabun PSK";src:local("TH Sarabun PSK"),local("THSarabunPSK"),local("TH SarabunPSK"),local("TH Sarabun New"),local("THSarabunNew");size-adjust:128%;unicode-range:U+0E00-0E7F}
+:root{--bg:#f4f8fb;--ink:#14212b;--muted:#5d6b76;--accent:#1f7a8c;--card:#fff;--line:#dbe5ec;--ok:#2e7d4f;
+  --font:"Inter","Sarabun PSK","Sarabun",system-ui,sans-serif}
 @media (prefers-color-scheme:dark){:root{--bg:#0f171d;--ink:#e6eef3;--muted:#9fb0bc;--accent:#4fb3c6;--card:#17222a;--line:#26343e;--ok:#5fc48a}}
-*{box-sizing:border-box}body{margin:0;font-family:Sarabun,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+*{box-sizing:border-box}body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:18px}
+img{display:block;max-width:100%}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
 .demo{background:var(--accent);color:#fff;text-align:center;font-size:13px;padding:6px}
-header{padding:48px 0 32px}h1{font-size:clamp(30px,5.5vw,48px);margin:0 0 8px;line-height:1.2}
-.lead{color:var(--muted);font-size:18px;max-width:600px}
-section{padding:28px 0;border-top:1px solid var(--line)}h2{margin:0 0 14px}
+header{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding:44px 0}
+@media(max-width:760px){header{grid-template-columns:1fr;padding-top:28px}}
+header img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:20px}
+h1{font-size:clamp(34px,5.5vw,52px);line-height:1.15;margin:0 0 10px;font-weight:700}
+.lead{color:var(--muted);font-size:20px;margin:0}
+.btn{display:inline-block;margin-top:20px;padding:12px 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font:inherit;font-weight:600;border:0;cursor:pointer}
+section{padding:36px 0;border-top:1px solid var(--line)}h2{margin:0 0 16px;font-size:30px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-.price{color:var(--accent);font-weight:600}.small{color:var(--muted);font-size:14px}
+.price{color:var(--accent);font-weight:700}.small{color:var(--muted);font-size:15px}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+@media(max-width:760px){.split{grid-template-columns:1fr}}
+.split img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:20px}
+ul.ticks{list-style:none;padding:0;margin:0}ul.ticks li{padding:6px 0 6px 26px;position:relative}
+ul.ticks li::before{content:"";position:absolute;left:4px;top:15px;width:10px;height:6px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
 form{display:grid;gap:12px;max-width:520px}
-label{display:grid;gap:4px;font-weight:600;font-size:15px}
-input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
-button{font:inherit;font-weight:600;padding:12px 18px;border:0;border-radius:999px;background:var(--accent);color:#fff;cursor:pointer}
+label{display:grid;gap:4px;font-weight:600;font-size:16px}
+input,select,textarea{font:inherit;font-size:17px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
 #done{display:none;color:var(--ok);font-weight:600}
-footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer{padding:28px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+footer a{color:inherit}.credits{margin-top:8px;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="demo">ตัวอย่างผลงาน (Demo) — คลินิกสมมติ ไม่ใช่สถานพยาบาลจริง</div>
 <div class="wrap">
 <header>
-  <h1>คลินิกทันตกรรมยิ้มสวย</h1>
-  <p class="lead">จองคิวออนไลน์ได้ตลอด 24 ชม. ไม่ต้องโทร ไม่ต้องรอสาย คลินิกยืนยันนัดกลับทาง LINE ภายใน 1 ชั่วโมงในเวลาทำการ</p>
+  <div>
+    <h1>คลินิกทันตกรรมยิ้มสวย</h1>
+    <p class="lead">จองคิวออนไลน์ได้ตลอด 24 ชม. ไม่ต้องโทร ไม่ต้องรอสาย คลินิกยืนยันนัดกลับทาง LINE ภายใน 1 ชั่วโมงในเวลาทำการ</p>
+    <a class="btn" href="#book">จองคิวเลย</a>
+  </div>
+  <img src="img/hero.jpg" alt="ห้องทำฟันพร้อมเก้าอี้ทันตกรรม" fetchpriority="high">
 </header>
 <section>
   <h2>บริการและราคาเริ่มต้น</h2>
@@ -40,6 +57,15 @@ footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var
     <div class="card"><b>อุดฟัน</b><div class="price">เริ่ม ฿900</div><div class="small">ต่อซี่</div></div>
     <div class="card"><b>ฟอกสีฟัน</b><div class="price">เริ่ม ฿4,500</div><div class="small">ปรึกษาก่อนทำ</div></div>
     <div class="card"><b>จัดฟัน</b><div class="price">ปรึกษาฟรี</div><div class="small">ประเมินแผนการรักษา</div></div>
+  </div>
+</section>
+<section>
+  <div class="split">
+    <img src="img/care.jpg" alt="แปรงสีฟันและยาสีฟัน" loading="lazy">
+    <div>
+      <h2>ดูแลต่อเนื่อง ไม่ต้องจำวันนัด</h2>
+      <ul class="ticks"><li>แจ้งเตือนนัดหมายล่วงหน้าทาง LINE</li><li>เตือนขูดหินปูนทุก 6 เดือน</li><li>ประวัติการรักษาเก็บไว้ครบในที่เดียว</li><li>ชำระเงินด้วยพร้อมเพย์ได้ทันที</li></ul>
+    </div>
   </div>
 </section>
 <section id="book">
@@ -51,16 +77,17 @@ footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var
     <label>วันที่ต้องการ<input type="date" name="date" required></label>
     <label>ช่วงเวลา<select name="slot"><option>10:00–12:00</option><option>13:00–15:00</option><option>15:00–17:00</option><option>17:00–19:00</option></select></label>
     <label>หมายเหตุ<textarea name="note" rows="3"></textarea></label>
-    <button>ส่งคำขอจองคิว</button>
+    <button class="btn" style="margin-top:4px">ส่งคำขอจองคิว</button>
     <div id="done">ได้รับคำขอแล้ว (ตัวอย่าง) — ในเว็บจริง ข้อมูลจะถูกบันทึกลง Google Sheets ของคลินิก และแจ้งเตือนเจ้าหน้าที่ทาง LINE OA</div>
   </form>
   <p class="small">ในเว็บจริง: แบบฟอร์มเชื่อม Google Apps Script → บันทึกลง Sheet → แจ้งเตือนผ่าน LINE Messaging API พร้อมข้อความยินยอมตาม PDPA</p>
 </section>
-<footer>เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · แบบฟอร์มในหน้านี้ไม่ส่งข้อมูลไปที่ใด</footer>
 </div>
+<footer><div class="wrap">เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · แบบฟอร์มในหน้านี้ไม่ส่งข้อมูลไปที่ใด
+<div class="credits">ภาพประกอบจาก Wikimedia Commons (ย่อขนาดและครอปเพื่อใช้บนเว็บ) — ภาพหลัก: <a href="https://commons.wikimedia.org/wiki/File:A_dental_chair_in_a_dentist_clinic_in_North_Carolina,_United_States.jpg" target="_blank" rel="noopener">Harrison Keely</a> (<a href="https://creativecommons.org/licenses/by/4.0" rel="license noopener" target="_blank">CC BY 4.0</a>) · ดูแลฟัน: <a href="https://commons.wikimedia.org/wiki/File:Toothbrush,_Toothpaste,_Dental_Care_(571741)_(cropped).jpg" target="_blank" rel="noopener">Steve Buissinne, South Africa</a> (<a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" rel="license noopener" target="_blank">CC0</a>)</div></div></footer>
 <script>
 const d=document.querySelector('input[type=date]');d.min=new Date().toISOString().slice(0,10);
-document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();e.target.reset();document.getElementById('done').style.display='block';});
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();if(!e.target.reportValidity())return;e.target.reset();document.getElementById('done').style.display='block';});
 </script>
 </body>
 </html>

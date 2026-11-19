@@ -5,11 +5,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ติวเตอร์บ้านเลข — ตัวอย่างเว็บไซต์โรงเรียนกวดวิชา</title>
 <meta name="description" content="ตัวอย่างเว็บไซต์โรงเรียนกวดวิชา พร้อมตารางเรียนและสมัครเรียนทดลอง (Portfolio demo)">
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f7fb;--ink:#151a2d;--muted:#5b6382;--accent:#3a4fd8;--accent2:#ffb020;--card:#fff;--line:#e2e5f0;--ok:#1f8a4c}
+@font-face{font-family:"Sarabun PSK";src:local("TH Sarabun PSK"),local("THSarabunPSK"),local("TH SarabunPSK"),local("TH Sarabun New"),local("THSarabunNew");size-adjust:128%;unicode-range:U+0E00-0E7F}
+:root{--bg:#f6f7fb;--ink:#151a2d;--muted:#5b6382;--accent:#3a4fd8;--accent2:#ffb020;--card:#fff;--line:#e2e5f0;--ok:#1f8a4c;
+  --font:"Inter","Sarabun PSK","Sarabun",system-ui,sans-serif}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1220;--ink:#e9ecf8;--muted:#a3aac4;--accent:#7f8cff;--accent2:#ffc04d;--card:#181c2e;--line:#2a2f45;--ok:#5fd394}}
-*{box-sizing:border-box}body{margin:0;font-family:Kanit,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+*{box-sizing:border-box}body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:18px}
+img{display:block;max-width:100%}
+.photo{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:20px}
+.stats{margin-top:28px;grid-template-columns:repeat(4,1fr)!important}
+@media(max-width:720px){.stats{grid-template-columns:1fr 1fr!important}}
+.room{width:100%;aspect-ratio:21/9;object-fit:cover;border-radius:16px;margin-bottom:14px}
+.credits{margin-top:8px;line-height:1.5;font-size:13px}footer a{color:inherit}
 .wrap{max-width:980px;margin:0 auto;padding:0 16px}
 .demo{background:var(--accent);color:#fff;text-align:center;font-size:13px;padding:6px}
 header{padding:52px 0 36px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
@@ -49,13 +58,14 @@ footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var
     <p class="lead">ติวคณิตศาสตร์ ม.1–ม.6 กลุ่มเล็กไม่เกิน 8 คน สอนจากพื้นฐาน เรียนที่สาขาหรือออนไลน์ก็ได้</p>
     <div class="btns"><a class="btn p" href="#trial">สมัครเรียนทดลองฟรี</a><a class="btn g" href="#schedule">ดูตารางเรียน</a></div>
   </div>
-  <div class="stats">
+  <img class="photo" src="img/hero.jpg" alt="ครูเขียนสมการคณิตศาสตร์บนไวท์บอร์ด" fetchpriority="high">
+</header>
+<div class="stats">
     <div class="stat"><b>8</b><span>คนต่อกลุ่มสูงสุด</span></div>
     <div class="stat"><b>90</b><span>นาทีต่อครั้ง</span></div>
     <div class="stat"><b>ม.1–6</b><span>ทุกระดับชั้น</span></div>
     <div class="stat"><b>ฟรี</b><span>เรียนทดลอง 1 ครั้ง</span></div>
-  </div>
-</header>
+</div>
 
 <section>
   <h2>คอร์สเรียน</h2>
@@ -68,6 +78,7 @@ footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var
 
 <section id="schedule">
   <h2>ตารางเรียน</h2>
+  <img class="room" src="img/room.jpg" alt="ห้องเรียนขนาดเล็กพร้อมโต๊ะเรียน" loading="lazy">
   <div class="tbl"><table>
     <thead><tr><th>คอร์ส</th><th>วัน</th><th>เวลา</th><th>ที่นั่ง</th></tr></thead>
     <tbody>
@@ -90,7 +101,8 @@ footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var
   </form>
   <p class="small">ในเว็บจริงจะมีข้อความขอความยินยอมเก็บข้อมูลตาม PDPA ก่อนกดส่ง</p>
 </section>
-<footer>เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · แบบฟอร์มในหน้านี้ไม่ส่งข้อมูลไปที่ใด</footer>
+<footer>เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · แบบฟอร์มในหน้านี้ไม่ส่งข้อมูลไปที่ใด
+<div class="credits">ภาพประกอบจาก Wikimedia Commons (ย่อขนาดและครอปเพื่อใช้บนเว็บ) — ภาพหลัก: <a href="https://commons.wikimedia.org/wiki/File:Maths_Tutor.jpg" target="_blank" rel="noopener">Preply.com Images</a> (<a href="https://creativecommons.org/licenses/by/2.0" rel="license noopener" target="_blank">CC BY 2.0</a>) · ห้องเรียน: <a href="https://commons.wikimedia.org/wiki/File:Empty_class_room.jpg" target="_blank" rel="noopener">Saral Shots</a> (<a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" rel="license noopener" target="_blank">CC0</a>)</div></footer>
 </div>
 <script>
 document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();if(!e.target.reportValidity())return;e.target.reset();document.getElementById('done').style.display='block';});

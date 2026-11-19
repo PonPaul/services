@@ -5,47 +5,61 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>บ้านกาแฟ — ตัวอย่างเว็บไซต์ร้านคาเฟ่</title>
 <meta name="description" content="ตัวอย่างเว็บไซต์หน้าเดียวสำหรับร้านคาเฟ่ (Portfolio demo)">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fbf7f2;--ink:#2b211b;--muted:#6f6158;--accent:#b4572e;--card:#fff;--line:#eadfd4}
+@font-face{font-family:"Sarabun PSK";src:local("TH Sarabun PSK"),local("THSarabunPSK"),local("TH SarabunPSK"),local("TH Sarabun New"),local("THSarabunNew");size-adjust:128%;unicode-range:U+0E00-0E7F}
+:root{--bg:#fbf7f2;--ink:#2b211b;--muted:#6f6158;--accent:#b4572e;--card:#fff;--line:#eadfd4;
+  --font:"Inter","Sarabun PSK","Sarabun",system-ui,sans-serif}
 @media (prefers-color-scheme:dark){:root{--bg:#1c1714;--ink:#f3ebe4;--muted:#b9aba0;--accent:#e08a5e;--card:#27201c;--line:#3a302a}}
-*{box-sizing:border-box}body{margin:0;font-family:Prompt,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+*{box-sizing:border-box}body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:18px}
+img{display:block;max-width:100%}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
 .demo{background:var(--accent);color:#fff;text-align:center;font-size:13px;padding:6px}
-header{padding:56px 0 40px}h1{font-size:clamp(32px,6vw,52px);margin:0 0 8px;line-height:1.15}
-.lead{color:var(--muted);font-size:18px;max-width:560px}
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.btn{display:inline-block;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:600;border:2px solid var(--accent)}
-.btn.primary{background:var(--accent);color:#fff}.btn.ghost{color:var(--accent)}
-section{padding:32px 0;border-top:1px solid var(--line)}h2{margin:0 0 16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.hero{position:relative;min-height:min(78vh,620px);display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 20%,rgba(0,0,0,.72))}
+.hero .wrap{position:relative;z-index:1;padding-bottom:48px;width:100%}
+h1{font-size:clamp(38px,7vw,64px);line-height:1.1;margin:0 0 10px;font-weight:700;letter-spacing:-.01em}
+.lead{font-size:20px;max-width:560px;margin:0;opacity:.92}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;border:2px solid var(--accent);font-size:17px}
+.btn.primary{background:var(--accent);color:#fff}.btn.ghost{color:#fff;border-color:rgba(255,255,255,.8)}
+section{padding:44px 0;border-top:1px solid var(--line)}h2{margin:0 0 18px;font-size:30px;font-weight:700}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.item img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.item div{padding:12px 14px}
+.item b{font-size:19px}.price{float:right;color:var(--accent);font-weight:700}
+.small{color:var(--muted);font-size:15px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-.price{float:right;color:var(--accent);font-weight:600}
-.small{color:var(--muted);font-size:14px}
-footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
-.sticky{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+footer{padding:28px 0 96px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+footer a{color:inherit}
+.credits{margin-top:8px;line-height:1.5}
+.sticky{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
+.sticky .btn{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.2)}
 @media(min-width:720px){.sticky{display:none}}
 </style>
 </head>
 <body>
 <div class="demo">ตัวอย่างผลงาน (Demo) — ร้านสมมติ ไม่ใช่ธุรกิจจริง</div>
-<div class="wrap">
-<header>
-  <h1>บ้านกาแฟ<br>กาแฟดี ขนมอบใหม่ทุกเช้า</h1>
-  <p class="lead">คาเฟ่เล็ก ๆ ในซอยเงียบ เปิดทุกวัน 7:00–18:00 มีที่จอดรถ Wi-Fi ฟรี และมุมนั่งทำงาน</p>
-  <div class="cta">
-    <a class="btn primary" href="#contact">สั่งล่วงหน้าทาง LINE</a>
-    <a class="btn ghost" href="#menu">ดูเมนู</a>
+<header class="hero">
+  <img src="img/hero.jpg" alt="บรรยากาศภายในร้านกาแฟ โต๊ะไม้และต้นไม้" fetchpriority="high">
+  <div class="wrap">
+    <h1>บ้านกาแฟ<br>กาแฟดี ขนมอบใหม่ทุกเช้า</h1>
+    <p class="lead">คาเฟ่เล็ก ๆ ในซอยเงียบ เปิดทุกวัน 7:00–18:00 มีที่จอดรถ Wi-Fi ฟรี และมุมนั่งทำงาน</p>
+    <div class="cta"><a class="btn primary" href="#contact">สั่งล่วงหน้าทาง LINE</a><a class="btn ghost" href="#menu">ดูเมนู</a></div>
   </div>
 </header>
+<div class="wrap">
 <section id="menu">
   <h2>เมนูแนะนำ</h2>
-  <div class="grid">
-    <div class="card"><span class="price">฿65</span><b>อเมริกาโน่เย็น</b><div class="small">เมล็ดคั่วกลาง จากดอยช้าง</div></div>
-    <div class="card"><span class="price">฿75</span><b>ลาเต้มะพร้าว</b><div class="small">นมมะพร้าวสด หวานน้อย</div></div>
-    <div class="card"><span class="price">฿55</span><b>ครัวซองต์เนยสด</b><div class="small">อบใหม่ทุกเช้า 8 โมง</div></div>
-    <div class="card"><span class="price">฿89</span><b>บานอฟฟี่</b><div class="small">ขายดีที่สุดของร้าน</div></div>
+  <div class="menu">
+    <div class="item"><img src="img/m/americano.jpg" alt="กาแฟเย็นในแก้วใส" loading="lazy"><div><span class="price">฿65</span><b>อเมริกาโน่เย็น</b><div class="small">เมล็ดคั่วกลาง จากดอยช้าง</div></div></div>
+    <div class="item"><img src="img/m/coconut.jpg" alt="กาแฟนมเย็นแก้วสูง" loading="lazy"><div><span class="price">฿75</span><b>ลาเต้มะพร้าว</b><div class="small">นมมะพร้าวสด หวานน้อย</div></div></div>
+    <div class="item"><img src="img/m/croissant.jpg" alt="ครัวซองต์เนยสด" loading="lazy"><div><span class="price">฿55</span><b>ครัวซองต์เนยสด</b><div class="small">อบใหม่ทุกเช้า 8 โมง</div></div></div>
+    <div class="item"><img src="img/m/banoffee.jpg" alt="พายบานอฟฟี่หนึ่งชิ้น" loading="lazy"><div><span class="price">฿89</span><b>บานอฟฟี่</b><div class="small">ขายดีที่สุดของร้าน</div></div></div>
   </div>
 </section>
 <section>
@@ -54,14 +68,15 @@ footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var
 </section>
 <section id="contact">
   <h2>ติดต่อ & แผนที่</h2>
-  <div class="grid">
+  <div class="info">
     <div class="card"><b>LINE</b><div class="small">@your-line-id</div></div>
     <div class="card"><b>โทร</b><div class="small">0X-XXX-XXXX</div></div>
     <div class="card"><b>ที่อยู่</b><div class="small">ใส่ลิงก์ Google Maps ของร้าน</div></div>
   </div>
 </section>
-<footer>เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · ออกแบบให้ใช้งานบนมือถือเป็นหลัก</footer>
 </div>
-<div class="sticky"><a class="btn primary" href="#contact">แอด LINE</a><a class="btn primary" href="#contact">โทร</a></div>
+<footer><div class="wrap">เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · ออกแบบให้ใช้งานบนมือถือเป็นหลัก
+<div class="credits">ภาพประกอบจาก Wikimedia Commons (ย่อขนาดและครอปเพื่อใช้บนเว็บ) — ภาพหลัก: <a href="https://commons.wikimedia.org/wiki/File:2019_02_Awesome_Coffee_Shop_in_Korat.jpg" target="_blank" rel="noopener">Takeaway</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0" rel="license noopener" target="_blank">CC BY-SA 4.0</a>) · อเมริกาโน่เย็น: <a href="https://commons.wikimedia.org/wiki/File:Iced_Coffee_in_Glass_-_Sunshine_Coffee_-_Laramie_Cafe_(53838344552).jpg" target="_blank" rel="noopener">Tony Webster</a> (<a href="https://creativecommons.org/licenses/by/2.0" rel="license noopener" target="_blank">CC BY 2.0</a>) · ลาเต้มะพร้าว: <a href="https://commons.wikimedia.org/wiki/File:Iced_B%E1%BA%A1c_X%E1%BB%89u_served_in_tall_glass_on_the_table_in_tha_cafe,_Danang_city,_2023.jpg" target="_blank" rel="noopener">Klientos</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0" rel="license noopener" target="_blank">CC BY-SA 4.0</a>) · ครัวซองต์: <a href="https://commons.wikimedia.org/wiki/File:Croissants_au_beurre_(18953292873).jpg" target="_blank" rel="noopener">Herry Wibisono (herryway)</a> (<a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" rel="license noopener" target="_blank">CC0</a>) · บานอฟฟี่: <a href="https://commons.wikimedia.org/wiki/File:Banoffee_pie_-_Richmond_Park,_UK.jpg" target="_blank" rel="noopener">Daderot</a> (<a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" rel="license noopener" target="_blank">CC0</a>)</div></div></footer>
+<div class="sticky"><a class="btn" href="#contact">แอด LINE</a><a class="btn" href="#contact">โทร</a></div>
 </body>
 </html>
