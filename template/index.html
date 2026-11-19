@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ระบบสต็อก + ใบแจ้งหนี้ PDF ด้วย Google Sheets</title>
+<meta name="description" content="เทมเพลต Google Sheets ตัดสต็อกอัตโนมัติ ออกใบแจ้งหนี้ PDF และแจ้งเตือนของใกล้หมด ใช้ฟรีกับบัญชี Google ของคุณ ไม่มีค่ารายเดือน">
+<meta property="og:type" content="product">
+<meta property="og:title" content="ระบบสต็อก + ใบแจ้งหนี้ PDF ด้วย Google Sheets">
+<meta property="og:description" content="ตัดสต็อกอัตโนมัติ · ออกใบแจ้งหนี้ในคลิกเดียว · แจ้งเตือนของใกล้หมด · ฿299">
+<meta property="og:url" content="https://ponpaul.github.io/services/template/">
+<meta property="og:image" content="https://ponpaul.github.io/services/img/og.png">
+<link rel="canonical" href="https://ponpaul.github.io/services/template/">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--white:#fff;--gray:#f5f5f7;--ink:#1d1d1f;--ink2:#6e6e73;--ink3:#86868b;--hair:#d2d2d7;--accent:#0a7c55;--accent-hover:#086a49;--accent-on-dark:#3ddc97;--ease:cubic-bezier(.28,.11,.32,1);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Noto Sans Thai","Helvetica Neue",Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.53;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.container{width:min(980px,100% - 44px);margin-inline:auto}
+.nav{position:sticky;top:0;z-index:50;height:52px;background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav .container{height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav a.back{font-size:13px;text-decoration:none;opacity:.8;display:inline-flex;align-items:center;gap:6px}.nav a.back:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;cursor:pointer;font:inherit;font-size:17px;font-weight:500;text-decoration:none;border-radius:980px;padding:12px 24px;transition:background .2s var(--ease),transform .15s var(--ease)}
+.btn:active{transform:scale(.97)}.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+.btn-link{background:none;color:var(--accent);padding:12px 6px}.btn-link:hover{text-decoration:underline}
+.btn.sm{font-size:13px;padding:5px 14px}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.025em;text-wrap:balance}
+.eyebrow{font-size:17px;font-weight:600;color:var(--accent);margin:0 0 8px}
+.display{font-size:clamp(36px,6.4vw,64px);line-height:1.1}
+.headline{font-size:clamp(28px,4.4vw,44px);line-height:1.15}
+.lede{font-size:clamp(19px,2.2vw,22px);line-height:1.45;color:var(--ink2);text-wrap:balance}
+section{padding:clamp(64px,10vw,112px) 0}.bg-gray{background:var(--gray)}
+.hero{text-align:center;padding-bottom:0}
+.hero .lede{max-width:620px;margin:18px auto 0}
+.price-line{margin-top:22px;font-size:17px;color:var(--ink2)}.price-line b{color:var(--ink);font-size:21px}
+.ctas{display:flex;gap:12px 20px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+
+/* sheet mock */
+.mock{margin:56px auto 0;max-width:860px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--hair),0 40px 80px -30px rgba(0,0,0,.25)}
+.mock .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--gray);border-bottom:1px solid var(--hair);font-size:13px;color:var(--ink2)}
+.mock .bar i{width:10px;height:10px;border-radius:50%;background:#d2d2d7;display:inline-block}
+.mock .bar span{margin-left:8px}
+.mock .tabs{display:flex;gap:2px;padding:0 10px;background:var(--gray);border-top:1px solid var(--hair);font-size:13px}
+.mock .tabs b{padding:7px 14px;font-weight:500;color:var(--ink2)}.mock .tabs b.on{background:#fff;color:var(--accent);box-shadow:inset 0 2px 0 var(--accent)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:500px;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{border:1px solid #ececf0;padding:8px 10px;text-align:left;white-space:nowrap}
+th:nth-child(n+3){text-align:right}
+th{background:#fafafa;font-weight:600;color:var(--ink2)}
+td.n{text-align:right}.low{background:#fff4f2;color:#c4321a;font-weight:600}
+td a{color:var(--accent);text-decoration:none}
+.caption{text-align:center;color:var(--ink3);font-size:13px;margin-top:14px}
+
+/* features */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,48px);margin-top:48px}
+.feat svg{width:36px;height:36px;color:var(--accent);margin-bottom:14px}
+.feat h3{font-size:21px;letter-spacing:-.015em;margin-bottom:6px}.feat p{margin:0;color:var(--ink2)}
+@media(max-width:760px){.feat{grid-template-columns:1fr}}
+
+/* plans */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+@media(max-width:700px){.plans{grid-template-columns:1fr}}
+.plan{background:#fff;border-radius:22px;padding:28px;box-shadow:0 0 0 1px var(--hair)}
+.plan.rec{box-shadow:0 0 0 2px var(--accent)}
+.plan h3{font-size:21px}.plan .amt{font-size:40px;font-weight:700;letter-spacing:-.03em;margin:8px 0 4px}
+.plan ul{list-style:none;padding:0;margin:16px 0 22px}
+.plan li{padding:5px 0 5px 24px;position:relative}
+.plan li::before{content:"";position:absolute;left:3px;top:13px;width:10px;height:6px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+.tag{font-size:12px;font-weight:600;color:var(--accent);margin-left:8px;vertical-align:3px}
+.status{font-size:14px;color:var(--accent);min-height:20px;margin:10px 0 0}
+
+.steps{counter-reset:s;list-style:none;padding:0;margin:40px 0 0;display:grid;gap:18px;max-width:640px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start}
+.steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;border:1px solid var(--hair);display:grid;place-items:center;font-size:14px;font-weight:600;color:var(--accent)}
+.steps b{display:block}.steps span{color:var(--ink2)}
+footer{background:var(--gray);color:var(--ink3);font-size:12px;padding:20px 0 36px}
+footer .container{border-top:1px solid var(--hair);padding-top:14px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+footer a{color:var(--ink2);text-decoration:none}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="container">
+  <a class="back" href="../"><svg width="8" height="12" viewBox="0 0 8 12" aria-hidden="true"><path d="M6.5 1l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>บริการทั้งหมด</a>
+  <a class="btn btn-primary sm" href="#buy">สั่งซื้อ</a>
+</div></header>
+
+<main>
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow reveal">เทมเพลต Google Sheets</p>
+    <h1 class="display reveal">สต็อกและใบแจ้งหนี้<br>จัดการเองอัตโนมัติ</h1>
+    <p class="lede reveal">บันทึกการขายหนึ่งแถว ระบบตัดสต็อก ออกใบแจ้งหนี้ PDF และเตือนเมื่อของใกล้หมดให้ทันที ใช้กับบัญชี Google ของคุณเอง ไม่มีค่ารายเดือน</p>
+    <p class="price-line reveal">เริ่มต้น <b>฿299</b> · ติดตั้งพร้อมใช้ ฿990</p>
+    <div class="ctas reveal"><a class="btn btn-primary" href="#buy">สั่งซื้อ</a><a class="btn btn-link" href="#how">ดูวิธีใช้งาน</a></div>
+  </div>
+  <div class="container">
+    <figure class="mock reveal" style="margin-bottom:0" aria-label="ตัวอย่างหน้าจอชีตสินค้า">
+      <div class="bar"><i></i><i></i><i></i><span>สต็อกและใบแจ้งหนี้ — Google Sheets</span></div>
+      <div class="scroll"><table>
+        <thead><tr><th>รหัส</th><th>ชื่อสินค้า</th><th>ราคาขาย</th><th>คงเหลือ</th><th>เตือนเมื่อต่ำกว่า</th></tr></thead>
+        <tbody>
+          <tr><td>P001</td><td>กาแฟคั่วกลาง 250 ก.</td><td class="n">฿220</td><td class="n">34</td><td class="n">10</td></tr>
+          <tr><td>P002</td><td>ชาไทยผง 500 ก.</td><td class="n">฿180</td><td class="n low">4</td><td class="n">8</td></tr>
+          <tr><td>P003</td><td>แก้วเก็บความเย็น</td><td class="n">฿390</td><td class="n">17</td><td class="n">5</td></tr>
+          <tr><td>P004</td><td>ไซรัปคาราเมล</td><td class="n">฿150</td><td class="n">12</td><td class="n">6</td></tr>
+        </tbody></table></div>
+      <div class="tabs"><b class="on">สินค้า</b><b>ขาย</b><b>ตั้งค่า</b></div>
+    </figure>
+    <p class="caption">ภาพประกอบหน้าจอ ข้อมูลเป็นตัวอย่าง · ช่องสีแดงคือสินค้าที่ต่ำกว่าจุดเตือน</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="headline reveal">ทำงานซ้ำ ๆ แทนคุณ</h2>
+    <div class="feat">
+      <div class="reveal"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 12l12-6 12 6v12l-12 6-12-6z"/><path d="M6 12l12 6 12-6M18 18v12"/></svg><h3>ตัดสต็อกทันที</h3><p>ทุกครั้งที่บันทึกการขาย จำนวนคงเหลือจะลดลงเอง และกันขายเกินสต็อก</p></div>
+      <div class="reveal"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 4h13l6 6v22H9z"/><path d="M22 4v6h6M13 18h10M13 23h10M13 28h6"/></svg><h3>ใบแจ้งหนี้ PDF</h3><p>เลขที่บิลเรียงอัตโนมัติ ใส่ชื่อร้านของคุณ เก็บไว้ใน Google Drive ส่งต่อให้ลูกค้าได้ทันที</p></div>
+      <div class="reveal"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 5a8 8 0 0 0-8 8v6l-3 5h22l-3-5v-6a8 8 0 0 0-8-8zM15 28a3 3 0 0 0 6 0"/></svg><h3>เตือนของใกล้หมด</h3><p>ส่งอีเมลสรุปรายการที่ต่ำกว่าจุดเตือน สั่งของได้ก่อนขาดตลาด</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray" id="how">
+  <div class="container">
+    <p class="eyebrow reveal">วิธีใช้งาน</p>
+    <h2 class="headline reveal">ติดตั้งครั้งเดียว ใช้ได้ตลอด</h2>
+    <ol class="steps">
+      <li class="reveal"><div><b>ทำสำเนาชีต</b><span>กดลิงก์ที่ได้รับ แล้วเลือก "ทำสำเนา" ลง Google Drive ของคุณ</span></div></li>
+      <li class="reveal"><div><b>ตั้งค่าครั้งแรก</b><span>เมนู ร้านค้า → ตั้งค่าครั้งแรก แล้วกดอนุญาตสิทธิ์หนึ่งครั้ง</span></div></li>
+      <li class="reveal"><div><b>ใส่สินค้าและชื่อร้าน</b><span>เพิ่มรายการสินค้า ราคา และจำนวนคงเหลือ</span></div></li>
+      <li class="reveal"><div><b>ขายแล้วกดบันทึก</b><span>กรอกการขายหนึ่งแถว เลือกแถว แล้วกดบันทึก ได้ใบแจ้งหนี้ทันที</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="buy">
+  <div class="container">
+    <h2 class="headline reveal" style="text-align:center">เลือกแบบที่เหมาะกับคุณ</h2>
+    <div class="plans">
+      <div class="plan reveal"><h3>ไฟล์พร้อมคู่มือ</h3><div class="amt">฿299</div><p style="margin:0;color:var(--ink2)">ติดตั้งเองใน 5 นาที</p>
+        <ul><li>ลิงก์ทำสำเนา Google Sheet</li><li>คู่มือภาษาไทยทีละขั้น</li><li>ตอบคำถามการติดตั้ง 7 วัน</li></ul>
+        <button class="btn btn-primary" data-plan="ไฟล์พร้อมคู่มือ ฿299">สั่งซื้อทาง LINE</button></div>
+      <div class="plan rec reveal"><h3>ติดตั้งพร้อมใช้<span class="tag">แนะนำ</span></h3><div class="amt">฿990</div><p style="margin:0;color:var(--ink2)">ไม่ต้องทำอะไรเอง</p>
+        <ul><li>ติดตั้งในบัญชี Google ของคุณ</li><li>ใส่ชื่อร้าน หัวบิล และสินค้าเริ่มต้นให้</li><li>ปรับคอลัมน์ให้ตรงกับร้าน 1 ครั้ง</li><li>ดูแลหลังติดตั้ง 14 วัน</li></ul>
+        <button class="btn btn-primary" data-plan="ติดตั้งพร้อมใช้ ฿990">สั่งซื้อทาง LINE</button></div>
+    </div>
+    <p class="status" id="status" role="status" style="text-align:center"></p>
+    <p style="text-align:center;color:var(--ink2);font-size:15px;margin-top:8px">ชำระผ่านพร้อมเพย์หลังยืนยันรายละเอียดในแชท</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="container"><span>© <span id="year"></span> Web &amp; Automation</span><a href="../">กลับหน้าบริการ</a></div></footer>
+
+<script>
+const LINE_ID = "tpb1234";
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduce) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .08 });
+    els.forEach(el => io.observe(el));
+  } else els.forEach(el => el.classList.add('in'));
+  const status = document.getElementById('status');
+  const isOA = LINE_ID.startsWith('@');
+  const profile = isOA ? 'https://line.me/R/ti/p/' + encodeURIComponent(LINE_ID) : 'https://line.me/ti/p/~' + encodeURIComponent(LINE_ID);
+  async function copy(t) { try { await navigator.clipboard.writeText(t); return true; } catch { return false; } }
+  document.querySelectorAll('[data-plan]').forEach(b => b.addEventListener('click', async () => {
+    const msg = 'สวัสดีครับ/ค่ะ สนใจสั่งซื้อเทมเพลตระบบสต็อก + ใบแจ้งหนี้\nแบบ: ' + b.dataset.plan;
+    if (isOA) { window.open('https://line.me/R/oaMessage/' + encodeURIComponent(LINE_ID) + '/?' + encodeURIComponent(msg), '_blank', 'noopener'); status.textContent = 'กำลังเปิด LINE…'; return; }
+    const ok = await copy(msg);
+    window.open(profile, '_blank', 'noopener');
+    status.textContent = ok ? 'คัดลอกข้อความสั่งซื้อแล้ว เพิ่มเพื่อนใน LINE แล้ววางในแชทได้เลย' : 'เปิด LINE แล้ว แจ้งชื่อแบบที่ต้องการในแชทได้เลย';
+  }));
+})();
+</script>
+</body>
+</html>
