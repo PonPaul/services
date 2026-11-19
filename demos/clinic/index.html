@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>คลินิกยิ้มสวย — ตัวอย่างเว็บไซต์จองคิว</title>
+<meta name="description" content="ตัวอย่างเว็บไซต์คลินิกพร้อมแบบฟอร์มจองคิว (Portfolio demo)">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f8fb;--ink:#14212b;--muted:#5d6b76;--accent:#1f7a8c;--card:#fff;--line:#dbe5ec;--ok:#2e7d4f}
+@media (prefers-color-scheme:dark){:root{--bg:#0f171d;--ink:#e6eef3;--muted:#9fb0bc;--accent:#4fb3c6;--card:#17222a;--line:#26343e;--ok:#5fc48a}}
+*{box-sizing:border-box}body{margin:0;font-family:Sarabun,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.demo{background:var(--accent);color:#fff;text-align:center;font-size:13px;padding:6px}
+header{padding:48px 0 32px}h1{font-size:clamp(30px,5.5vw,48px);margin:0 0 8px;line-height:1.2}
+.lead{color:var(--muted);font-size:18px;max-width:600px}
+section{padding:28px 0;border-top:1px solid var(--line)}h2{margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.price{color:var(--accent);font-weight:600}.small{color:var(--muted);font-size:14px}
+form{display:grid;gap:12px;max-width:520px}
+label{display:grid;gap:4px;font-weight:600;font-size:15px}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+button{font:inherit;font-weight:600;padding:12px 18px;border:0;border-radius:999px;background:var(--accent);color:#fff;cursor:pointer}
+#done{display:none;color:var(--ok);font-weight:600}
+footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="demo">ตัวอย่างผลงาน (Demo) — คลินิกสมมติ ไม่ใช่สถานพยาบาลจริง</div>
+<div class="wrap">
+<header>
+  <h1>คลินิกทันตกรรมยิ้มสวย</h1>
+  <p class="lead">จองคิวออนไลน์ได้ตลอด 24 ชม. ไม่ต้องโทร ไม่ต้องรอสาย คลินิกยืนยันนัดกลับทาง LINE ภายใน 1 ชั่วโมงในเวลาทำการ</p>
+</header>
+<section>
+  <h2>บริการและราคาเริ่มต้น</h2>
+  <div class="grid">
+    <div class="card"><b>ขูดหินปูน</b><div class="price">เริ่ม ฿800</div><div class="small">30–45 นาที</div></div>
+    <div class="card"><b>อุดฟัน</b><div class="price">เริ่ม ฿900</div><div class="small">ต่อซี่</div></div>
+    <div class="card"><b>ฟอกสีฟัน</b><div class="price">เริ่ม ฿4,500</div><div class="small">ปรึกษาก่อนทำ</div></div>
+    <div class="card"><b>จัดฟัน</b><div class="price">ปรึกษาฟรี</div><div class="small">ประเมินแผนการรักษา</div></div>
+  </div>
+</section>
+<section id="book">
+  <h2>จองคิว</h2>
+  <form id="f">
+    <label>ชื่อ<input name="name" required autocomplete="name"></label>
+    <label>เบอร์โทร<input name="phone" required inputmode="tel" pattern="[0-9\- ]{9,12}"></label>
+    <label>บริการ<select name="service"><option>ขูดหินปูน</option><option>อุดฟัน</option><option>ฟอกสีฟัน</option><option>ปรึกษาจัดฟัน</option></select></label>
+    <label>วันที่ต้องการ<input type="date" name="date" required></label>
+    <label>ช่วงเวลา<select name="slot"><option>10:00–12:00</option><option>13:00–15:00</option><option>15:00–17:00</option><option>17:00–19:00</option></select></label>
+    <label>หมายเหตุ<textarea name="note" rows="3"></textarea></label>
+    <button>ส่งคำขอจองคิว</button>
+    <div id="done">ได้รับคำขอแล้ว (ตัวอย่าง) — ในเว็บจริง ข้อมูลจะถูกบันทึกลง Google Sheets ของคลินิก และแจ้งเตือนเจ้าหน้าที่ทาง LINE OA</div>
+  </form>
+  <p class="small">ในเว็บจริง: แบบฟอร์มเชื่อม Google Apps Script → บันทึกลง Sheet → แจ้งเตือนผ่าน LINE Messaging API พร้อมข้อความยินยอมตาม PDPA</p>
+</section>
+<footer>เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · แบบฟอร์มในหน้านี้ไม่ส่งข้อมูลไปที่ใด</footer>
+</div>
+<script>
+const d=document.querySelector('input[type=date]');d.min=new Date().toISOString().slice(0,10);
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();e.target.reset();document.getElementById('done').style.display='block';});
+</script>
+</body>
+</html>

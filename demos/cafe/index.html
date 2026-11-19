@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>บ้านกาแฟ — ตัวอย่างเว็บไซต์ร้านคาเฟ่</title>
+<meta name="description" content="ตัวอย่างเว็บไซต์หน้าเดียวสำหรับร้านคาเฟ่ (Portfolio demo)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf7f2;--ink:#2b211b;--muted:#6f6158;--accent:#b4572e;--card:#fff;--line:#eadfd4}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1714;--ink:#f3ebe4;--muted:#b9aba0;--accent:#e08a5e;--card:#27201c;--line:#3a302a}}
+*{box-sizing:border-box}body{margin:0;font-family:Prompt,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.demo{background:var(--accent);color:#fff;text-align:center;font-size:13px;padding:6px}
+header{padding:56px 0 40px}h1{font-size:clamp(32px,6vw,52px);margin:0 0 8px;line-height:1.15}
+.lead{color:var(--muted);font-size:18px;max-width:560px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{display:inline-block;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:600;border:2px solid var(--accent)}
+.btn.primary{background:var(--accent);color:#fff}.btn.ghost{color:var(--accent)}
+section{padding:32px 0;border-top:1px solid var(--line)}h2{margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.price{float:right;color:var(--accent);font-weight:600}
+.small{color:var(--muted);font-size:14px}
+footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.sticky{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+@media(min-width:720px){.sticky{display:none}}
+</style>
+</head>
+<body>
+<div class="demo">ตัวอย่างผลงาน (Demo) — ร้านสมมติ ไม่ใช่ธุรกิจจริง</div>
+<div class="wrap">
+<header>
+  <h1>บ้านกาแฟ<br>กาแฟดี ขนมอบใหม่ทุกเช้า</h1>
+  <p class="lead">คาเฟ่เล็ก ๆ ในซอยเงียบ เปิดทุกวัน 7:00–18:00 มีที่จอดรถ Wi-Fi ฟรี และมุมนั่งทำงาน</p>
+  <div class="cta">
+    <a class="btn primary" href="#contact">สั่งล่วงหน้าทาง LINE</a>
+    <a class="btn ghost" href="#menu">ดูเมนู</a>
+  </div>
+</header>
+<section id="menu">
+  <h2>เมนูแนะนำ</h2>
+  <div class="grid">
+    <div class="card"><span class="price">฿65</span><b>อเมริกาโน่เย็น</b><div class="small">เมล็ดคั่วกลาง จากดอยช้าง</div></div>
+    <div class="card"><span class="price">฿75</span><b>ลาเต้มะพร้าว</b><div class="small">นมมะพร้าวสด หวานน้อย</div></div>
+    <div class="card"><span class="price">฿55</span><b>ครัวซองต์เนยสด</b><div class="small">อบใหม่ทุกเช้า 8 โมง</div></div>
+    <div class="card"><span class="price">฿89</span><b>บานอฟฟี่</b><div class="small">ขายดีที่สุดของร้าน</div></div>
+  </div>
+</section>
+<section>
+  <h2>รีวิวจากลูกค้า</h2>
+  <p class="small">ส่วนนี้ในเว็บจริงจะแสดงรีวิวจริงจาก Google Maps ของร้านเท่านั้น</p>
+</section>
+<section id="contact">
+  <h2>ติดต่อ & แผนที่</h2>
+  <div class="grid">
+    <div class="card"><b>LINE</b><div class="small">@your-line-id</div></div>
+    <div class="card"><b>โทร</b><div class="small">0X-XXX-XXXX</div></div>
+    <div class="card"><b>ที่อยู่</b><div class="small">ใส่ลิงก์ Google Maps ของร้าน</div></div>
+  </div>
+</section>
+<footer>เว็บไซต์ตัวอย่างสำหรับพอร์ตโฟลิโอ · ออกแบบให้ใช้งานบนมือถือเป็นหลัก</footer>
+</div>
+<div class="sticky"><a class="btn primary" href="#contact">แอด LINE</a><a class="btn primary" href="#contact">โทร</a></div>
+</body>
+</html>
