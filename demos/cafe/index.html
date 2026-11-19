@@ -38,8 +38,9 @@ footer{padding:28px 0 96px;color:var(--muted);font-size:13px;border-top:1px soli
 footer a{color:inherit}
 .credits{margin-top:8px;line-height:1.5}
 .sticky{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
-.sticky .btn{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.sticky .btn{white-space:nowrap;background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.2)}
 @media(min-width:720px){.sticky{display:none}}
+h1,h2,.lead{text-wrap:balance}
 </style>
 </head>
 <body>
@@ -47,7 +48,7 @@ footer a{color:inherit}
 <header class="hero">
   <img src="img/hero.jpg" alt="บรรยากาศภายในร้านกาแฟ โต๊ะไม้และต้นไม้" fetchpriority="high">
   <div class="wrap">
-    <h1>บ้านกาแฟ<br>กาแฟดี ขนมอบใหม่ทุกเช้า</h1>
+    <h1>บ้านกาแฟ<br>กาแฟดี <span style="white-space:nowrap">ขนมอบใหม่ทุกเช้า</span></h1>
     <p class="lead">คาเฟ่เล็ก ๆ ในซอยเงียบ เปิดทุกวัน 7:00–18:00 มีที่จอดรถ Wi-Fi ฟรี และมุมนั่งทำงาน</p>
     <div class="cta"><a class="btn primary" href="#contact">สั่งล่วงหน้าทาง LINE</a><a class="btn ghost" href="#menu">ดูเมนู</a></div>
   </div>
